@@ -126,16 +126,20 @@ const LessonTake: React.FC = () => {
     setCurrentAnswer(value);
   };
 
-  const saveCurrentAnswer = () => {
-    if (!currentTask || !currentAnswer.trim()) return;
+// src/pages/student/ui.LessonTake.tsx
 
-    const newAnswers = answers.filter(a => a.task_id !== currentTask.id);
-    newAnswers.push({
-      task_id: currentTask.id,
-      answer: currentAnswer.trim()
-    });
-    setAnswers(newAnswers);
-  };
+const saveCurrentAnswer = () => {
+  // Add a guard to ensure currentTask and its id exist
+  if (!currentTask?.id || !currentAnswer.trim()) return;
+
+  const newAnswers = answers.filter(a => a.task_id !== String(currentTask.id));
+  newAnswers.push({
+    // Convert id to string
+    task_id: String(currentTask.id),
+    answer: currentAnswer.trim()
+  });
+  setAnswers(newAnswers);
+};
 
   const handleNext = () => {
     saveCurrentAnswer();
@@ -164,8 +168,8 @@ const LessonTake: React.FC = () => {
     
     const finalAnswers = [...answers];
     if (currentTask && currentAnswer.trim()) {
-      const filtered = finalAnswers.filter(a => a.task_id !== currentTask.id);
-      filtered.push({ task_id: currentTask.id, answer: currentAnswer.trim() });
+      const filtered = finalAnswers.filter(a => a.task_id !== (currentTask.id as string));
+      filtered.push({ task_id: currentTask.id as string, answer: currentAnswer.trim() });
       finalAnswers.splice(0, finalAnswers.length, ...filtered);
     }
 
@@ -212,18 +216,19 @@ const LessonTake: React.FC = () => {
   const renderTaskInput = () => {
     if (!currentTask) return null;
 
-    // ✅ BEZPIECZNE PARSOWANIE OPTIONS
-    let options: string[] = [];
-    try {
-      if (Array.isArray(currentTask.options)) {
-        options = currentTask.options;
-      } else if (typeof currentTask.options === 'string') {
-        options = JSON.parse(currentTask.options);
-      }
-    } catch (e) {
-      console.error("Błąd parsowania options:", e);
-      options = [];
-    }
+   // ✅ FIX: Broaden the type to allow for objects
+   let options: (string | { text: string })[] = []; 
+   try {
+     if (Array.isArray(currentTask.options)) {
+       options = currentTask.options;
+     } else if (typeof currentTask.options === 'string') {
+       options = JSON.parse(currentTask.options);
+     }
+   } catch (e) {
+     console.error("Błąd parsowania options:", e);
+     options = [];
+   }
+
 
     switch (currentTask.type) {
       case 'multiple_choice':
@@ -286,7 +291,7 @@ const LessonTake: React.FC = () => {
   // ✅ RESULTS SCREEN
   if (isCompleted && results) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 flex items-center justify-center">
+      <div className=" flex items-center justify-center">
         <Card className="w-full max-w-2xl mx-4">
           <CardContent className="p-8 text-center">
             <div className="mb-6">
