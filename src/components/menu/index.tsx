@@ -41,8 +41,8 @@ export const Menu: React.FC<MenuProps> = ({ onClose }) => {
       {/* Header */}
       <div className="flex h-16 items-center justify-between border-b px-6">
         <div className="flex items-center">
-          <MenuIcon className="h-6 w-6 mr-2" />
-          <span className="font-semibold">Logo.com</span>
+          <MenuIcon className="h-5 w-5 mr-2" />
+          <img src={'/smart-edu-play-logo.svg'} alt="Logo" className=" h-9 " />
         </div>
         {onClose && (
           <Button

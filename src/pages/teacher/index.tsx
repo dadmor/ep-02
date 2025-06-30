@@ -1,4 +1,4 @@
-// src/pages/teacher/index.tsx - ZAKTUALIZOWANY z nowymi komponentami
+// src/pages/teacher/index.tsx - NAPRAWIONY z komponentami odznak
 import React from "react";
 import { Route } from "react-router-dom";
 
@@ -24,6 +24,9 @@ import TaskCreate from "./ui.TaskCreate";
 import TaskEdit from "./ui.TaskEdit";
 import TaskShow from "./ui.TaskShow";
 import TeacherBadges from "./ui.Badges";
+import BadgeCreate from "./ui.BadgeCreate";  // DODANE
+import BadgeEdit from "./ui.BadgeEdit";      // DODANE
+import BadgeShow from "./ui.BadgeShow";      // DODANE
 import ErrorAnalysis from "./ui.ErrorAnalysis";
 import Rankings from "./ui.Rankings";
 import ArticleEdit from "./ui.ArticleEdit";
@@ -50,6 +53,9 @@ export { default as TaskCreate } from "./ui.TaskCreate";
 export { default as TaskEdit } from "./ui.TaskEdit";
 export { default as TaskShow } from "./ui.TaskShow";
 export { default as TeacherBadges } from "./ui.Badges";
+export { default as BadgeCreate } from "./ui.BadgeCreate";    // DODANE
+export { default as BadgeEdit } from "./ui.BadgeEdit";        // DODANE  
+export { default as BadgeShow } from "./ui.BadgeShow";        // DODANE
 export { default as ErrorAnalysis } from "./ui.ErrorAnalysis";
 export { default as Rankings } from "./ui.Rankings";
 export { default as ArticleEdit } from "./ui.ArticleEdit";
@@ -123,6 +129,7 @@ export const teacherResources = [
     list: "/teacher/badges",
     create: "/teacher/badges/create",
     edit: "/teacher/badges/edit/:id",
+    show: "/teacher/badges/:id",        // DODANE show
     meta: {
       label: "Odznaki",
       icon: "🏆",
@@ -208,8 +215,11 @@ export const teacherRoutes = [
   // Progress
   <Route key="teacher-progress" path="/teacher/progress" element={<StudentProgress />} />,
   
-  // Badges
+  // Badges - POPRAWIONE I DODANE
   <Route key="teacher-badges" path="/teacher/badges" element={<TeacherBadges />} />,
+  <Route key="teacher-badges-create" path="/teacher/badges/create" element={<BadgeCreate />} />,
+  <Route key="teacher-badges-edit" path="/teacher/badges/edit/:id" element={<BadgeEdit />} />,
+  <Route key="teacher-badges-show" path="/teacher/badges/:id" element={<BadgeShow />} />,
   
   // Error Analysis
   <Route key="teacher-errors" path="/teacher/errors" element={<ErrorAnalysis />} />,

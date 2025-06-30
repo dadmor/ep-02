@@ -9,7 +9,6 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [opacity, setOpacity] = useState(1);
 
-
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -28,9 +27,10 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-background relative">
+      {/* Gradient Background - dostosowany do kolorów logo */}
       <div
         style={{ opacity }}
-        className="h-96 fixed top-0 w-full bg-gradient-to-br from-zinc-500/0 to-zinc-500/10 -rotate-1 scale-125"
+        className="h-96 fixed top-0 w-full bg-gradient-to-br from-blue-800/30 via-purple-600/20 to-orange-500/10 -rotate-[0.5deg] scale-125"
       ></div>
 
       <div className="flex relative">

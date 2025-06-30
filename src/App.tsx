@@ -1,4 +1,4 @@
-// src/App.tsx
+// src/App.tsx - TYLKO DODAJ LANDING PAGE, reszta bez zmian
 import { Authenticated, ErrorComponent, Refine } from "@refinedev/core";
 import routerBindings, {
   CatchAllNavigate,
@@ -12,14 +12,20 @@ import { Layout } from "./components/layout";
 import { authProvider, supabaseClient } from "./utility";
 
 import { authRoutes } from "./pages/auth";
+// DODAJ TYLKO TĘ LINIĘ:
+import { LandingPage } from "./pages/landing";
 
-
-
-// Import zorganizowanych teacher exports
+// Import zorganizowanych teacher exports - BEZ ZMIAN
 import {
   teacherResources,
   teacherRoutes,
 } from "./pages/teacher";
+
+// Import student exports - BEZ ZMIAN
+import {
+  studentResources,
+  studentRoutes,
+} from "./pages/student";
 
 function App() {
   return (
@@ -31,6 +37,7 @@ function App() {
         routerProvider={routerBindings}
         resources={[
           ...teacherResources,
+          ...studentResources,
         ]}
         options={{
           syncWithLocation: true,
@@ -39,10 +46,13 @@ function App() {
         }}
       >
         <Routes>
-          {/* Public routes */}
+          {/* Landing page - poza kontrolą auth */}
+          <Route path="/" element={<LandingPage />} />
+
+          {/* Auth routes - BEZ ZMIAN */}
           {...authRoutes}
 
-          {/* Protected routes wrapper */}
+          {/* Protected routes wrapper - BEZ ZMIAN - USUŃ /app/* */}
           <Route
             element={
               <Authenticated
@@ -55,22 +65,17 @@ function App() {
               </Authenticated>
             }
           >
-            {/* Default redirect */}
-            <Route
-              index
-              element={<NavigateToResource resource="campaigns" />}
-            />
-
-           
-
-            {/* Teacher routes - używamy zorganizowanych routes */}
+            {/* Teacher routes - BEZ ZMIAN */}
             {...teacherRoutes}
 
-            {/* 404 */}
+            {/* Student routes - BEZ ZMIAN */}
+            {...studentRoutes}
+
+            {/* 404 - BEZ ZMIAN */}
             <Route path="*" element={<ErrorComponent />} />
           </Route>
         </Routes>
-
+  
         <UnsavedChangesNotifier />
         <DocumentTitleHandler />
       </Refine>
