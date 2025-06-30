@@ -1,4 +1,4 @@
-// src/pages/teacher/index.tsx - POPRAWIONY dla rzeczywistej bazy danych
+// src/pages/teacher/index.tsx - ZAKTUALIZOWANY z TaskShow i TaskEdit
 import React from "react";
 import { Route } from "react-router-dom";
 
@@ -16,18 +16,18 @@ import TeacherStudents from "./ui.Students";
 import StudentProgress from "./ui.StudentProgress";
 import TeacherArticles from "./ui.Articles";
 import ArticleCreate from "./ui.ArticleCreate";
-// import ArticleEdit from "./ui.ArticleEdit";
 import ArticleShow from "./ui.ArticleShow";
 import TeacherTasks from "./ui.Tasks";
 import TaskCreate from "./ui.TaskCreate";
-// import TaskEdit from "./ui.TaskEdit";
-// import TaskShow from "./ui.TaskShow";
+import TaskEdit from "./ui.TaskEdit";
+import TaskShow from "./ui.TaskShow";
 import TeacherBadges from "./ui.Badges";
 // import BadgeCreate from "./ui.BadgeCreate";
 // import BadgeEdit from "./ui.BadgeEdit";
 // import ClassEnrollments from "./ui.ClassEnrollments";
 import ErrorAnalysis from "./ui.ErrorAnalysis";
 import Rankings from "./ui.Rankings";
+import ArticleEdit from "./ui.ArticleEdit";
 
 // Export wszystkich komponentów
 export { TeacherDashboard } from "./dashboard";
@@ -43,12 +43,12 @@ export { default as TeacherStudents } from "./ui.Students";
 export { default as StudentProgress } from "./ui.StudentProgress";
 export { default as TeacherArticles } from "./ui.Articles";
 export { default as ArticleCreate } from "./ui.ArticleCreate";
-// export { default as ArticleEdit } from "./ui.ArticleEdit";
+
 export { default as ArticleShow } from "./ui.ArticleShow";
 export { default as TeacherTasks } from "./ui.Tasks";
 export { default as TaskCreate } from "./ui.TaskCreate";
-// export { default as TaskEdit } from "./ui.TaskEdit";
-// export { default as TaskShow } from "./ui.TaskShow";
+export { default as TaskEdit } from "./ui.TaskEdit";
+export { default as TaskShow } from "./ui.TaskShow";
 export { default as TeacherBadges } from "./ui.Badges";
 // export { default as BadgeCreate } from "./ui.BadgeCreate";
 // export { default as BadgeEdit } from "./ui.BadgeEdit";
@@ -157,7 +157,7 @@ export const teacherResources = [
   },
 ];
 
-// Routes dla teacher - kompletne
+// Routes dla teacher - kompletne z TaskShow i TaskEdit
 export const teacherRoutes = [
   <Route key="teacher-dashboard" path="/teacher" element={<TeacherDashboard />} />,
   <Route key="teacher-dashboard-explicit" path="/teacher/dashboard" element={<TeacherDashboard />} />,
@@ -171,14 +171,14 @@ export const teacherRoutes = [
   // Articles
   <Route key="teacher-articles" path="/teacher/articles" element={<TeacherArticles />} />,
   <Route key="teacher-articles-create" path="/teacher/articles/create" element={<ArticleCreate />} />,
-  // <Route key="teacher-articles-edit" path="/teacher/articles/edit/:id" element={<ArticleEdit />} />,
+  <Route key="teacher-articles-edit" path="/teacher/articles/edit/:id" element={<ArticleEdit />} />,
   <Route key="teacher-articles-show" path="/teacher/articles/:id" element={<ArticleShow />} />,
   
-  // Tasks
+  // Tasks - KOMPLETNE
   <Route key="teacher-tasks" path="/teacher/tasks" element={<TeacherTasks />} />,
   <Route key="teacher-tasks-create" path="/teacher/tasks/create" element={<TaskCreate />} />,
-  // <Route key="teacher-tasks-edit" path="/teacher/tasks/edit/:id" element={<TaskEdit />} />,
-  // <Route key="teacher-tasks-show" path="/teacher/tasks/:id" element={<TaskShow />} />,
+  <Route key="teacher-tasks-edit" path="/teacher/tasks/edit/:id" element={<TaskEdit />} />,
+  <Route key="teacher-tasks-show" path="/teacher/tasks/:id" element={<TaskShow />} />,
   
   // Classes
   <Route key="teacher-classes" path="/teacher/classes" element={<TeacherClasses />} />,
@@ -199,7 +199,7 @@ export const teacherRoutes = [
   // <Route key="teacher-badges-edit" path="/teacher/badges/edit/:id" element={<BadgeEdit />} />,
   
   // Enrollments
-    // <Route key="teacher-enrollments" path="/teacher/enrollments" element={<ClassEnrollments />} />,
+  // <Route key="teacher-enrollments" path="/teacher/enrollments" element={<ClassEnrollments />} />,
   
   // Error Analysis
   <Route key="teacher-errors" path="/teacher/errors" element={<ErrorAnalysis />} />,
