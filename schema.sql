@@ -52,12 +52,6 @@ lesson_id UUID NOT NULL,
 given_answer TEXT NOT NULL,                    
 created_at TIMESTAMPTZ NOT NULL DEFAULT now()  
 );
-CREATE TABLE lesson_progress (                   
-user_id UUID,                                  
-lesson_id UUID,                                
-avg_score NUMERIC,                             
-last_attempt TIMESTAMPTZ                       
-);
 CREATE TABLE lessons (                           
 id UUID NOT NULL DEFAULT uuid_generate_v4(),   
 title TEXT NOT NULL,                           

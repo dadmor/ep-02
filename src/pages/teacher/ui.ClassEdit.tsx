@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -17,20 +16,13 @@ import { ArrowLeft, Save } from "lucide-react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 
-// Definicja typu dla danych klasy
+// Definicja typu dla danych klasy - dopasowana do rzeczywistego schematu
 interface ClassData {
   id: string;
   name: string;
-  description?: string;
-  subject?: string;
-  grade?: string;
-  school_year?: string;
-  room?: string;
-  status?: "active" | "inactive" | "archived";
-  notes?: string;
-  education_year?: number;
+  education_year: number;
+  grade: string;
   created_at?: string;
-  updated_at?: string;
 }
 
 export default function ClassEdit() {
@@ -60,13 +52,8 @@ export default function ClassEdit() {
     if (classData) {
       reset({
         name: classData.name || "",
-        description: classData.description || "",
-        subject: classData.subject || "",
+        education_year: classData.education_year || new Date().getFullYear(),
         grade: classData.grade || "",
-        school_year: classData.school_year || "",
-        room: classData.room || "",
-        status: classData.status || "active",
-        notes: classData.notes || "",
       });
     }
   }, [classData, reset]);
@@ -74,7 +61,7 @@ export default function ClassEdit() {
   const onSubmit = (data: any) => {
     onFinish({
       ...data,
-      updated_at: new Date().toISOString(),
+      education_year: parseInt(data.education_year), // Upewnij się, że to jest liczba
     });
   };
 
@@ -144,49 +131,6 @@ export default function ClassEdit() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="status">Status</Label>
-                <Select
-                  onValueChange={(value) => setValue("status", value)}
-                  defaultValue={classData.status}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Wybierz status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="active">Aktywna</SelectItem>
-                    <SelectItem value="inactive">Nieaktywna</SelectItem>
-                    <SelectItem value="archived">Zarchiwizowana</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="subject">Przedmiot</Label>
-                <Select 
-                  onValueChange={(value) => setValue("subject", value)}
-                  defaultValue={classData.subject}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Wybierz przedmiot" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Matematyka">Matematyka</SelectItem>
-                    <SelectItem value="Polski">Język Polski</SelectItem>
-                    <SelectItem value="Angielski">Język Angielski</SelectItem>
-                    <SelectItem value="Historia">Historia</SelectItem>
-                    <SelectItem value="Geografia">Geografia</SelectItem>
-                    <SelectItem value="Biologia">Biologia</SelectItem>
-                    <SelectItem value="Chemia">Chemia</SelectItem>
-                    <SelectItem value="Fizyka">Fizyka</SelectItem>
-                    <SelectItem value="Informatyka">Informatyka</SelectItem>
-                    <SelectItem value="Plastyka">Plastyka</SelectItem>
-                    <SelectItem value="Muzyka">Muzyka</SelectItem>
-                    <SelectItem value="WF">Wychowanie Fizyczne</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
                 <Label htmlFor="grade">Poziom/Klasa</Label>
                 <Select 
                   onValueChange={(value) => setValue("grade", value)}
@@ -211,43 +155,24 @@ export default function ClassEdit() {
                 </Select>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="school_year">Rok szkolny</Label>
+              <div className="space-y-2 md:col-span-2">
+                <Label htmlFor="education_year">Rok edukacji</Label>
                 <Input
-                  id="school_year"
-                  {...register("school_year")}
-                  placeholder="np. 2024/2025"
+                  id="education_year"
+                  type="number"
+                  {...register("education_year", { 
+                    required: "Rok edukacji jest wymagany",
+                    min: { value: 2020, message: "Rok musi być większy niż 2020" },
+                    max: { value: 2030, message: "Rok musi być mniejszy niż 2030" }
+                  })}
+                  placeholder="np. 2024"
                 />
+                {errors.education_year && (
+                  <p className="text-sm text-red-500">
+                    {errors.education_year.message as string}
+                  </p>
+                )}
               </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="room">Sala</Label>
-                <Input
-                  id="room"
-                  {...register("room")}
-                  placeholder="np. 101, Pracownia komputerowa"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="description">Opis klasy</Label>
-              <Textarea
-                id="description"
-                {...register("description")}
-                placeholder="Opisz klasę, cele nauczania, wymagania..."
-                rows={4}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="notes">Notatki</Label>
-              <Textarea
-                id="notes"
-                {...register("notes")}
-                placeholder="Dodatkowe informacje, uwagi..."
-                rows={3}
-              />
             </div>
 
             <div className="flex justify-end space-x-2">

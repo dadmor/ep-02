@@ -1,4 +1,4 @@
-// src/pages/teacher/index.tsx - ZAKTUALIZOWANY z TaskShow i TaskEdit
+// src/pages/teacher/index.tsx - ZAKTUALIZOWANY z nowymi komponentami
 import React from "react";
 import { Route } from "react-router-dom";
 
@@ -12,6 +12,8 @@ import TeacherClasses from "./ui.Classes";
 import ClassCreate from "./ui.ClassCreate";
 import ClassEdit from "./ui.ClassEdit";
 import ClassShow from "./ui.ClassShow";
+import ClassEnrollments from "./ui.ClassEnrollments";
+import ClassLessons from "./ui.ClassLessons";
 import TeacherStudents from "./ui.Students";
 import StudentProgress from "./ui.StudentProgress";
 import TeacherArticles from "./ui.Articles";
@@ -22,9 +24,6 @@ import TaskCreate from "./ui.TaskCreate";
 import TaskEdit from "./ui.TaskEdit";
 import TaskShow from "./ui.TaskShow";
 import TeacherBadges from "./ui.Badges";
-// import BadgeCreate from "./ui.BadgeCreate";
-// import BadgeEdit from "./ui.BadgeEdit";
-// import ClassEnrollments from "./ui.ClassEnrollments";
 import ErrorAnalysis from "./ui.ErrorAnalysis";
 import Rankings from "./ui.Rankings";
 import ArticleEdit from "./ui.ArticleEdit";
@@ -39,22 +38,21 @@ export { default as TeacherClasses } from "./ui.Classes";
 export { default as ClassCreate } from "./ui.ClassCreate";
 export { default as ClassEdit } from "./ui.ClassEdit";
 export { default as ClassShow } from "./ui.ClassShow";
+export { default as ClassEnrollments } from "./ui.ClassEnrollments";
+export { default as ClassLessons } from "./ui.ClassLessons";
 export { default as TeacherStudents } from "./ui.Students";
 export { default as StudentProgress } from "./ui.StudentProgress";
 export { default as TeacherArticles } from "./ui.Articles";
 export { default as ArticleCreate } from "./ui.ArticleCreate";
-
 export { default as ArticleShow } from "./ui.ArticleShow";
 export { default as TeacherTasks } from "./ui.Tasks";
 export { default as TaskCreate } from "./ui.TaskCreate";
 export { default as TaskEdit } from "./ui.TaskEdit";
 export { default as TaskShow } from "./ui.TaskShow";
 export { default as TeacherBadges } from "./ui.Badges";
-// export { default as BadgeCreate } from "./ui.BadgeCreate";
-// export { default as BadgeEdit } from "./ui.BadgeEdit";
-// export { default as ClassEnrollments } from "./ui.ClassEnrollments";
 export { default as ErrorAnalysis } from "./ui.ErrorAnalysis";
 export { default as Rankings } from "./ui.Rankings";
+export { default as ArticleEdit } from "./ui.ArticleEdit";
 
 // Resource definitions dla Refine - dostosowane do RZECZYWISTEJ bazy
 export const teacherResources = [
@@ -140,6 +138,15 @@ export const teacherResources = [
     },
   },
   {
+    name: "class_lessons",
+    list: "/teacher/class-lessons",
+    create: "/teacher/class-lessons/create",
+    meta: {
+      label: "Lekcje w klasach",
+      icon: "📖",
+    },
+  },
+  {
     name: "error_analysis",
     list: "/teacher/errors",
     meta: {
@@ -157,7 +164,7 @@ export const teacherResources = [
   },
 ];
 
-// Routes dla teacher - kompletne z TaskShow i TaskEdit
+// Routes dla teacher - kompletne z nowymi komponentami
 export const teacherRoutes = [
   <Route key="teacher-dashboard" path="/teacher" element={<TeacherDashboard />} />,
   <Route key="teacher-dashboard-explicit" path="/teacher/dashboard" element={<TeacherDashboard />} />,
@@ -174,7 +181,7 @@ export const teacherRoutes = [
   <Route key="teacher-articles-edit" path="/teacher/articles/edit/:id" element={<ArticleEdit />} />,
   <Route key="teacher-articles-show" path="/teacher/articles/:id" element={<ArticleShow />} />,
   
-  // Tasks - KOMPLETNE
+  // Tasks
   <Route key="teacher-tasks" path="/teacher/tasks" element={<TeacherTasks />} />,
   <Route key="teacher-tasks-create" path="/teacher/tasks/create" element={<TaskCreate />} />,
   <Route key="teacher-tasks-edit" path="/teacher/tasks/edit/:id" element={<TaskEdit />} />,
@@ -186,6 +193,14 @@ export const teacherRoutes = [
   <Route key="teacher-classes-edit" path="/teacher/classes/edit/:id" element={<ClassEdit />} />,
   <Route key="teacher-classes-show" path="/teacher/classes/:id" element={<ClassShow />} />,
   
+  // Class Management - NOWE KOMPONENTY
+  <Route key="teacher-class-enrollments" path="/teacher/classes/:id/enrollments" element={<ClassEnrollments />} />,
+  <Route key="teacher-class-lessons" path="/teacher/classes/:id/lessons" element={<ClassLessons />} />,
+  
+  // Alternative routes for class management
+  <Route key="teacher-enrollments" path="/teacher/enrollments" element={<ClassEnrollments />} />,
+  <Route key="teacher-class-lessons-alt" path="/teacher/class-lessons" element={<ClassLessons />} />,
+  
   // Students
   <Route key="teacher-students" path="/teacher/students" element={<TeacherStudents />} />,
   <Route key="teacher-students-show" path="/teacher/students/:id" element={<StudentProgress />} />,
@@ -195,11 +210,6 @@ export const teacherRoutes = [
   
   // Badges
   <Route key="teacher-badges" path="/teacher/badges" element={<TeacherBadges />} />,
-  // <Route key="teacher-badges-create" path="/teacher/badges/create" element={<BadgeCreate />} />,
-  // <Route key="teacher-badges-edit" path="/teacher/badges/edit/:id" element={<BadgeEdit />} />,
-  
-  // Enrollments
-  // <Route key="teacher-enrollments" path="/teacher/enrollments" element={<ClassEnrollments />} />,
   
   // Error Analysis
   <Route key="teacher-errors" path="/teacher/errors" element={<ErrorAnalysis />} />,
