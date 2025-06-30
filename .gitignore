@@ -1,0 +1,9 @@
+# Logs
+node_modules
+dist
+assets
+
+
+# Editor directories and files
+.env
+package-lock.json
