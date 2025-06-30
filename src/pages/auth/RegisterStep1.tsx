@@ -32,13 +32,12 @@ export const RegisterStep1: React.FC = () => {
               placeholder: "Wybierz swoją rolę",
               options: [
                 {
-                  value: "beneficiary",
-                  label: "Beneficjent - zakładajacy zlecenie",
+                  value: "teacher",
+                  label: "Nauczyciel",
                 },
-                { value: "auditor", label: "Auditor - opiniujacy zlecenie" },
                 {
-                  value: "contractor",
-                  label: "Wykonawca - realizujacy zlecenie",
+                  value: "student",
+                  label: "Uczeń",
                 },
               ],
             },
