@@ -7,6 +7,7 @@ import { UserPlus } from "lucide-react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { FooterBranding } from "./FooterBranding";
 
 export const RegisterStep1: React.FC = () => {
   const navigate = useNavigate();
@@ -86,6 +87,8 @@ export const RegisterStep1: React.FC = () => {
 
   return (
     <NarrowCol>
+
+
       <div className="flex items-start gap-5 ">
         <UserPlus className="mt-2 bg-white rounded-full p-2 w-12 h-12" />
         <Lead
@@ -105,6 +108,10 @@ export const RegisterStep1: React.FC = () => {
           Masz już konto? Zaloguj się
         </Link>
       </div>
+
+
+      {/* Logo z opisem w stylu stopki */}
+      <FooterBranding className="pt-12" />
     </NarrowCol>
   );
 };

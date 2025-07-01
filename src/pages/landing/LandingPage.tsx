@@ -107,7 +107,7 @@ export function LandingPage() {
   ];
 
   const handleGetStarted = () => {
-    navigate('/login');
+    navigate('/register/step1');
   };
 
   const handleLogin = () => {

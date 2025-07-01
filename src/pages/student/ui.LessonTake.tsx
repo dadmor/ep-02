@@ -291,7 +291,7 @@ const saveCurrentAnswer = () => {
   // ✅ RESULTS SCREEN
   if (isCompleted && results) {
     return (
-      <div className=" flex items-center justify-center">
+      <div className="flex items-center justify-center">
         <Card className="w-full max-w-2xl mx-4">
           <CardContent className="p-8 text-center">
             <div className="mb-6">
@@ -370,7 +370,7 @@ const saveCurrentAnswer = () => {
 
   // ✅ MAIN RENDER
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+    <div className="min-h-screen ">
       <div className="container mx-auto p-4 max-w-4xl">
         
         {/* Header z postępem */}

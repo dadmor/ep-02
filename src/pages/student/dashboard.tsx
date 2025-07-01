@@ -1,6 +1,4 @@
-// ====================================================
 // src/pages/student/dashboard.tsx
-// ====================================================
 import React from 'react';
 import { useOne, useList, useGetIdentity } from '@refinedev/core';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -22,36 +20,57 @@ import {
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
+interface Lesson {
+  id: string;
+  title: string;
+  description: string;
+}
+
+interface ProgressRecord {
+  lesson_id: string;
+  score: number;
+  attempts_count: number;
+}
+
+interface BadgeType {
+  id: string;
+  name: string;
+  // inne właściwości jeśli są
+}
+
+interface UserBadge {
+  badge_id: string;
+}
+
+interface Ranking {
+  rank: number;
+}
+
 export const StudentDashboard: React.FC = () => {
   const navigate = useNavigate();
   const { data: identity } = useGetIdentity<{ id: string; username: string; xp: number; level: number; streak: number; }>();
 
-  // Pobierz dostępne lekcje dla ucznia
-  const { data: lessonsData } = useList({
+  const { data: lessonsData } = useList<Lesson>({
     resource: "lessons",
     pagination: { pageSize: 10 },
     sorters: [{ field: "created_at", order: "asc" }],
   });
 
-  // Pobierz postępy ucznia
-  const { data: progressData } = useList({
+  const { data: progressData } = useList<ProgressRecord>({
     resource: "progress",
     filters: [{ field: "user_id", operator: "eq", value: identity?.id }],
   });
 
-  // Pobierz odznaki ucznia
-  const { data: userBadgesData } = useList({
+  const { data: userBadgesData } = useList<UserBadge>({
     resource: "user_badges",
     filters: [{ field: "user_id", operator: "eq", value: identity?.id }],
   });
 
-  // Pobierz wszystkie dostępne odznaki
-  const { data: allBadgesData } = useList({
+  const { data: allBadgesData } = useList<BadgeType>({
     resource: "badges",
   });
 
-  // Pobierz pozycję w rankingu
-  const { data: rankingData } = useList({
+  const { data: rankingData } = useList<Ranking>({
     resource: "student_rankings",
     filters: [{ field: "user_id", operator: "eq", value: identity?.id }],
   });
@@ -62,20 +81,17 @@ export const StudentDashboard: React.FC = () => {
   const allBadges = allBadgesData?.data || [];
   const userRanking = rankingData?.data?.[0];
 
-  // Funkcja do sprawdzenia czy lekcja jest dostępna
   const isLessonAvailable = (lessonIndex: number) => {
-    if (lessonIndex === 0) return true; // Pierwsza lekcja zawsze dostępna
+    if (lessonIndex === 0) return true;
     const previousLesson = lessons[lessonIndex - 1];
-    return progressRecords.some(p => p.lesson_id === previousLesson?.id && p.score >= 70);
+    if (!previousLesson?.id) return false;
+    return progressRecords.some(p => p.lesson_id === previousLesson.id && p.score >= 70);
   };
 
-  // Funkcja do pobrania postępu lekcji
   const getLessonProgress = (lessonId: string) => {
-    const progress = progressRecords.find(p => p.lesson_id === lessonId);
-    return progress || null;
+    return progressRecords.find(p => p.lesson_id === lessonId) || null;
   };
 
-  // Oblicz progress do następnego poziomu
   const getLevelProgress = () => {
     if (!identity) return 0;
     const currentLevelXP = (identity.level - 1) * 1000;
@@ -84,7 +100,6 @@ export const StudentDashboard: React.FC = () => {
     return (progressInLevel / 1000) * 100;
   };
 
-  // Przygotuj odznaki z informacją czy zostały zdobyte
   const badgesWithStatus = allBadges.map(badge => ({
     ...badge,
     earned: userBadges.some(ub => ub.badge_id === badge.id)
@@ -160,6 +175,7 @@ export const StudentDashboard: React.FC = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 {lessons.map((lesson, index) => {
+                  if (!lesson.id) return null; // zabezpieczenie przed undefined
                   const progress = getLessonProgress(lesson.id);
                   const isAvailable = isLessonAvailable(index);
                   const isCompleted = progress && progress.score >= 70;
@@ -213,7 +229,11 @@ export const StudentDashboard: React.FC = () => {
                           
                           <Button 
                             disabled={!isAvailable}
-                            onClick={() => navigate(`/student/lessons/${lesson.id}`)}
+                            onClick={() => {
+                              if (lesson.id) {
+                                navigate(`/student/lessons/${lesson.id}`);
+                              }
+                            }}
                             className={
                               isCompleted 
                                 ? 'bg-green-500 hover:bg-green-600' 

@@ -91,7 +91,7 @@ const StudentRankings: React.FC = () => {
                   <p className="text-sm"><strong>{student.xp}</strong> XP</p>
                   <p className="text-xs text-gray-500">Passa: {student.streak} dni</p>
                 </div>
-                <Badge className={getRankBadgeClass(student.rank)} size="sm">
+                <Badge className={getRankBadgeClass(student.rank)}>
                   #{student.rank}
                 </Badge>
               </CardContent>
@@ -120,7 +120,7 @@ const StudentRankings: React.FC = () => {
                 }`}
               >
                 <div className="flex items-center gap-4">
-                  <Badge className={getRankBadgeClass(student.rank)} size="sm">
+                  <Badge className={getRankBadgeClass(student.rank)}>
                     #{student.rank}
                   </Badge>
                   <div>

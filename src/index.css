@@ -17,47 +17,47 @@
     "Liberation Mono", Menlo, monospace;
 
   --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
+  --foreground: 223 51% 28%; /* logo navy #23386D */
   --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
+  --card-foreground: 223 51% 28%; /* logo navy #23386D */
   --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-  --primary: 142 76% 36%; /* green-600 */
+  --popover-foreground: 223 51% 28%; /* logo navy #23386D */
+  --primary: 223 51% 28%; /* logo navy #23386D */
   --primary-foreground: 210 40% 98%;
-  --secondary: 210 40% 96%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 196 54% 54%; /* logo light blue #49A6C9 */
+  --secondary-foreground: 0 0% 100%;
   --muted: 210 40% 96%;
   --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 152 60% 53%; /* emerald-400 */
-  --accent-foreground: 222.2 47.4% 11.2%;
-  --destructive: 0 84.2% 60.2%;
+  --accent: 177 44% 50%; /* logo teal #47B8B2 */
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 67% 57%; /* logo red #DA4747 */
   --destructive-foreground: 210 40% 98%;
   --border: 214.3 31.8% 91.4%;
   --input: 214.3 31.8% 91.4%;
-  --ring: 142 76% 36%; /* green-600 */
+  --ring: 223 51% 28%; /* logo navy #23386D */
   --radius: 0.5rem;
 }
 
 .dark {
-  --background: 222.2 84% 4.9%;
+  --background: 223 51% 4%; /* very dark navy */
   --foreground: 210 40% 98%;
-  --card: 222.2 84% 4.9%;
+  --card: 223 51% 8%; /* dark navy */
   --card-foreground: 210 40% 98%;
-  --popover: 222.2 84% 4.9%;
+  --popover: 223 51% 8%; /* dark navy */
   --popover-foreground: 210 40% 98%;
-  --primary: 134 61% 41%; /* green-500 */
-  --primary-foreground: 222.2 47.4% 11.2%;
+  --primary: 196 54% 54%; /* logo light blue #49A6C9 in dark mode */
+  --primary-foreground: 223 51% 4%;
   --secondary: 217.2 32.6% 17.5%;
   --secondary-foreground: 210 40% 98%;
   --muted: 217.2 32.6% 17.5%;
   --muted-foreground: 215 20.2% 65.1%;
-  --accent: 167 85% 45%; /* emerald-500 */
+  --accent: 177 44% 60%; /* brighter logo teal in dark */
   --accent-foreground: 210 40% 98%;
-  --destructive: 0 62.8% 30.6%;
+  --destructive: 0 67% 65%; /* brighter logo red in dark */
   --destructive-foreground: 210 40% 98%;
   --border: 217.2 32.6% 17.5%;
   --input: 217.2 32.6% 17.5%;
-  --ring: 142 70% 45%; /* green-500 */
+  --ring: 196 54% 54%; /* logo light blue ring in dark */
 }
 
 body {

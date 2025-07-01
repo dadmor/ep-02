@@ -1,4 +1,4 @@
-// LoginPage.tsx - Ulepszona wersja z lepszą obsługą błędów
+// LoginPage.tsx - Ulepszona wersja z lepszą obsługą błędów i opisem pod logo
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,6 +16,8 @@ import { NarrowCol } from "@/components/layout/NarrowCol";
 import { Lead } from "@/components/reader";
 import { useLoginForm } from "@/utility/useLoginForm"; // Import custom hook
 import { Link } from "react-router-dom";
+import { Separator } from "@/components/ui";
+import { FooterBranding } from "./FooterBranding";
 
 export const LoginPage: React.FC = () => {
   const {
@@ -48,8 +50,6 @@ export const LoginPage: React.FC = () => {
 
   return (
     <NarrowCol>
-    
-
       <Card>
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl text-center">Zaloguj się</CardTitle>
@@ -187,6 +187,9 @@ export const LoginPage: React.FC = () => {
           </div>
         </CardContent>
       </Card>
+      
+      {/* Logo z opisem w stylu stopki */}
+      <FooterBranding className="pt-12" />
     </NarrowCol>
   );
 };

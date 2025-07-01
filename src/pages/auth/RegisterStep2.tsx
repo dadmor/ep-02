@@ -7,6 +7,7 @@ import { SchemaForm } from "@/components/SchemaForm";
 import { NarrowCol } from "@/components/layout/NarrowCol";
 import { Lead } from "@/components/reader";
 import { useFormSchemaStore } from "@/utility/formSchemaStore"; // ✅ Dodano import
+import { FooterBranding } from "./FooterBranding";
 
 export const RegisterStep2: React.FC = () => {
   const navigate = useNavigate();
@@ -50,6 +51,8 @@ export const RegisterStep2: React.FC = () => {
           Masz już konto? Zaloguj się
         </a>
       </div>
+      {/* Logo z opisem w stylu stopki */}
+      <FooterBranding className="pt-12" />
     </NarrowCol>
   );
 };

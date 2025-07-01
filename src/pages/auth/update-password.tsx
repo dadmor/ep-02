@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2 } from 'lucide-react';
+import { FooterBranding } from './FooterBranding';
 
 export const UpdatePasswordPage: React.FC = () => {
   const { mutate: updatePassword, isLoading, error } = useUpdatePassword();
@@ -85,6 +86,8 @@ export const UpdatePasswordPage: React.FC = () => {
             </form>
           </CardContent>
         </Card>
+        {/* Logo z opisem w stylu stopki */}
+      <FooterBranding className="pt-12" />
       </div>
     </div>
   );

@@ -17,7 +17,6 @@ import {
   TrendingUp
 } from "lucide-react";
 import { FlexBox, GridBox } from "@/components/shared";
-import { Lead } from "@/components/reader";
 import { useParams } from "react-router-dom";
 
 export default function TaskShow() {
@@ -30,6 +29,7 @@ export default function TaskShow() {
   });
 
   // Pobierz lekcję dla tego zadania
+  
   const { data: lessonData } = useShow({
     resource: "lessons",
     id: queryResult.data?.data?.lesson_id,

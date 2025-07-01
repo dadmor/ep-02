@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, CheckCircle } from 'lucide-react';
 import { NarrowCol } from '@/components/layout/NarrowCol';
+import { FooterBranding } from './FooterBranding';
 
 export const ForgotPasswordPage: React.FC = () => {
   const { mutate: forgotPassword, isLoading, error, isSuccess } = useForgotPassword();
@@ -97,6 +98,8 @@ export const ForgotPasswordPage: React.FC = () => {
             </div>
           </CardContent>
         </Card>
+        {/* Logo z opisem w stylu stopki */}
+      <FooterBranding className="pt-12" />
       </NarrowCol>
   );
 };
