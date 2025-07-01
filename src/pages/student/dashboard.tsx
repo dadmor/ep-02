@@ -111,7 +111,7 @@ export const StudentDashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      <div className="container mx-auto p-4 max-w-6xl">
+      <div className="">
         
         {/* Header z profilem */}
         <div className="mb-8">

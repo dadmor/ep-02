@@ -19,18 +19,64 @@ import {
 import { FlexBox, GridBox } from "@/components/shared";
 import { useParams } from "react-router-dom";
 
+interface TaskOption {
+  text: string;
+  isCorrect: boolean;
+}
+
+interface Task {
+  id: string;
+  lesson_id: string;
+  article_id?: string;
+  type: 'single_choice' | 'multiple_choice' | 'true_false' | 'fill_blank';
+  question_text: string;
+  explanation?: string;
+  xp_reward: number;
+  correct_answer?: string;
+  options?: TaskOption[];
+  created_at: string;
+}
+
+interface Lesson {
+  id: string;
+  title: string;
+  description: string;
+  subject?: string;
+  grade?: string;
+}
+
+interface Article {
+  id: string;
+  title: string;
+  content?: string;
+}
+
+interface Progress {
+  id: string;
+  user_id: string;
+  lesson_id: string;
+  score: number;
+}
+
+interface IncorrectAnswer {
+  id: string;
+  task_id: string;
+  user_id: string;
+  given_answer: string;
+  created_at: string;
+}
+
 export default function TaskShow() {
   const { id } = useParams();
   const { goBack, edit } = useNavigation();
   
-  const { queryResult } = useShow({
+  const { queryResult } = useShow<Task>({
     resource: "tasks",
     id: id!,
   });
 
   // Pobierz lekcję dla tego zadania
-  
-  const { data: lessonData } = useShow({
+  const { queryResult: lessonQueryResult } = useShow<Lesson>({
     resource: "lessons",
     id: queryResult.data?.data?.lesson_id,
     queryOptions: {
@@ -39,7 +85,7 @@ export default function TaskShow() {
   });
 
   // Pobierz artykuł jeśli jest powiązany
-  const { data: articleData } = useShow({
+  const { queryResult: articleQueryResult } = useShow<Article>({
     resource: "articles",
     id: queryResult.data?.data?.article_id,
     queryOptions: {
@@ -48,7 +94,7 @@ export default function TaskShow() {
   });
 
   // Pobierz postępy dla tego zadania
-  const { data: progressList } = useList({
+  const { data: progressList } = useList<Progress>({
     resource: "progress",
     filters: [
       {
@@ -66,7 +112,7 @@ export default function TaskShow() {
   });
 
   // Pobierz błędne odpowiedzi
-  const { data: incorrectAnswers } = useList({
+  const { data: incorrectAnswers } = useList<IncorrectAnswer>({
     resource: "incorrect_answers",
     filters: [
       {
@@ -91,8 +137,8 @@ export default function TaskShow() {
 
   const { data: taskResponse, isLoading } = queryResult;
   const taskData = taskResponse?.data;
-  const lesson = lessonData?.data;
-  const article = articleData?.data;
+  const lesson = lessonQueryResult.data?.data;
+  const article = articleQueryResult.data?.data;
   const progressData = progressList?.data || [];
   const incorrectAnswersList = incorrectAnswers?.data || [];
 
@@ -150,9 +196,9 @@ export default function TaskShow() {
     uniqueStudents: new Set(progressData.map(p => p.user_id)).size,
   };
 
-  const options = taskData.options ? 
+  const options: TaskOption[] = taskData.options ? 
     (Array.isArray(taskData.options) ? taskData.options : 
-     typeof taskData.options === 'object' ? Object.values(taskData.options) : []) : [];
+     typeof taskData.options === 'object' ? Object.values(taskData.options) as TaskOption[] : []) : [];
 
   return (
     <>
@@ -246,7 +292,7 @@ export default function TaskShow() {
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {options.map((option: any, index: number) => (
+              {options.map((option, index) => (
                 <div key={index} className={`p-3 border rounded-lg flex items-center gap-3 ${
                   option.isCorrect ? 'bg-green-50 border-green-200' : 'bg-gray-50'
                 }`}>
@@ -383,7 +429,7 @@ export default function TaskShow() {
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {incorrectAnswersList.slice(0, 10).map((incorrect: any) => (
+              {incorrectAnswersList.slice(0, 10).map((incorrect) => (
                 <div key={incorrect.id} className="border rounded-lg p-3">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium">

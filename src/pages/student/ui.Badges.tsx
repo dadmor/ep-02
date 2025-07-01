@@ -5,19 +5,48 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Award, Lock, Star } from "lucide-react";
 
+interface BadgeType {
+  id: string;
+  name: string;
+  description: string;
+}
+
+interface UserBadge {
+  id: string;
+  user_id: string;
+  badge_id: string;
+  awarded_at: string;
+}
+
+interface BadgeCriteria {
+  id: string;
+  badge_id: string;
+  criteria_type: string;
+  criteria_value: number;
+}
+
+interface BadgeWithStatus {
+  id: string;
+  name: string;
+  description: string;
+  earned: boolean;
+  awarded_at?: string;
+  criteria: BadgeCriteria[];
+}
+
 const StudentBadges: React.FC = () => {
   const { data: identity } = useGetIdentity<{ id: string }>();
 
-  const { data: allBadgesData } = useList({
+  const { data: allBadgesData } = useList<BadgeType>({
     resource: "badges",
   });
 
-  const { data: userBadgesData } = useList({
+  const { data: userBadgesData } = useList<UserBadge>({
     resource: "user_badges",
     filters: [{ field: "user_id", operator: "eq", value: identity?.id }],
   });
 
-  const { data: badgeCriteriaData } = useList({
+  const { data: badgeCriteriaData } = useList<BadgeCriteria>({
     resource: "badge_criteria",
   });
 
@@ -25,17 +54,21 @@ const StudentBadges: React.FC = () => {
   const userBadges = userBadgesData?.data || [];
   const criteria = badgeCriteriaData?.data || [];
 
-  const badgesWithStatus = allBadges.map(badge => {
-    const userBadge = userBadges.find(ub => ub.badge_id === badge.id);
-    const badgeCriteria = criteria.filter(c => c.badge_id === badge.id);
-    
-    return {
-      ...badge,
-      earned: !!userBadge,
-      awarded_at: userBadge?.awarded_at,
-      criteria: badgeCriteria
-    };
-  });
+  const badgesWithStatus: BadgeWithStatus[] = allBadges
+    .filter(badge => badge.id) // Najpierw filtrujemy badge'y z id
+    .map(badge => {
+      const userBadge = userBadges.find(ub => ub.badge_id === badge.id);
+      const badgeCriteria = criteria.filter(c => c.badge_id === badge.id);
+      
+      return {
+        id: badge.id as string, // Type assertion bo wiemy że id istnieje po filtrze
+        name: badge.name,
+        description: badge.description,
+        earned: !!userBadge,
+        awarded_at: userBadge?.awarded_at,
+        criteria: badgeCriteria
+      };
+    });
 
   const earnedBadges = badgesWithStatus.filter(b => b.earned);
   const availableBadges = badgesWithStatus.filter(b => !b.earned);
