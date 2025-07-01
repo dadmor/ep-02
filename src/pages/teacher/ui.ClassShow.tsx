@@ -235,7 +235,7 @@ export default function ClassShow() {
         </CardContent>
       </Card>
 
-      <GridBox>
+      <GridBox variant="1-2-2">
         {/* Students Card */}
         <Card>
           <CardHeader>
