@@ -1,4 +1,4 @@
-// pages/RegisterStep4.tsx - Krok podsumowania
+// pages/RegisterStep4.tsx - Ulepszona wersja z obsługą różnych scenariuszy
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -11,11 +11,13 @@ import {
   RefreshCw,
   Shield,
   User,
-  Clock
+  Clock,
+  AlertCircle
 } from "lucide-react";
 import { NarrowCol } from "@/components/layout/NarrowCol";
 import { Lead } from "@/components/reader";
 import { useFormSchemaStore } from "@/utility/formSchemaStore";
+import { FooterBranding } from "./FooterBranding";
 
 export const RegisterStep4: React.FC = () => {
   const navigate = useNavigate();
@@ -25,13 +27,14 @@ export const RegisterStep4: React.FC = () => {
 
   const processData = getData("registration");
   const email = processData?.email || "user@example.com";
-  const role = processData?.role || "beneficiary";
+  const role = processData?.role || "student";
+  const isNewRegistration = processData?.successData?.isNewRegistration ?? true;
 
-  // ✅ Wyczyść dane po 30 sekundach lub gdy użytkownik przejdzie do logowania
+  // ✅ Wyczyść dane po 60 sekundach
   React.useEffect(() => {
     const timer = setTimeout(() => {
       unregister("registration", "data");
-    }, 30000); // 30 sekund
+    }, 60000); // 60 sekund
 
     return () => clearTimeout(timer);
   }, [unregister]);
@@ -42,7 +45,7 @@ export const RegisterStep4: React.FC = () => {
       // Tutaj wywołanie API do ponownego wysłania maila
       await new Promise(resolve => setTimeout(resolve, 2000)); // Symulacja
       setResendSuccess(true);
-      setTimeout(() => setResendSuccess(false), 3000);
+      setTimeout(() => setResendSuccess(false), 5000);
     } catch (error) {
       console.error("Błąd wysyłania maila:", error);
     } finally {
@@ -57,34 +60,51 @@ export const RegisterStep4: React.FC = () => {
   };
 
   const getRoleIcon = (role: string) => {
-    return role === "auditor" ? Shield : User;
+    return role === "teacher" ? Shield : User;
   };
 
   const getRoleLabel = (role: string) => {
-    return role === "auditor" ? "Auditor - Audytor systemu" : "Beneficiary - Użytkownik końcowy";
+    return role === "teacher" ? "Nauczyciel" : "Uczeń";
   };
 
   return (
     <NarrowCol>
-      <Lead 
-        title="Rejestracja zakończona!" 
-        description="4 z 4 Sprawdź swoją skrzynkę mailową" 
-      />
+      <div className="flex items-start gap-5">
+        <CheckCircle className="mt-2 bg-white rounded-full p-2 w-12 h-12 text-green-600" />
+        <Lead 
+          title={isNewRegistration ? "Rejestracja zakończona!" : "Email wysłany ponownie!"} 
+          description="Sprawdź swoją skrzynkę mailową" 
+        />
+      </div>
 
-      {/* Sukces */}
+      {/* Alert sukcesu */}
       <Card className="border-green-200 bg-green-50">
         <CardHeader>
           <CardTitle className="flex items-center text-green-800">
             <CheckCircle className="mr-2 h-6 w-6 text-green-600" />
-            Konto zostało utworzone!
+            {isNewRegistration ? "Konto zostało utworzone!" : "Konto już istnieje"}
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="text-green-700">
-            <p className="font-medium">Gratulacje! Twoje konto zostało pomyślnie utworzone.</p>
-            <p className="text-sm mt-1">
-              Wysłaliśmy email z potwierdzeniem na adres <strong>{email}</strong>
-            </p>
+            {isNewRegistration ? (
+              <>
+                <p className="font-medium">Gratulacje! Twoje konto zostało pomyślnie utworzone.</p>
+                <p className="text-sm mt-1">
+                  Wysłaliśmy email z linkiem aktywacyjnym na adres <strong>{email}</strong>
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="font-medium">Twoje konto już istnieje w systemie.</p>
+                <p className="text-sm mt-1">
+                  Wysłaliśmy ponownie email z linkiem aktywacyjnym na adres <strong>{email}</strong>
+                </p>
+                <p className="text-sm mt-2 text-green-600">
+                  Jeśli już aktywowałeś konto, możesz przejść bezpośrednio do logowania.
+                </p>
+              </>
+            )}
           </div>
         </CardContent>
       </Card>
@@ -94,7 +114,7 @@ export const RegisterStep4: React.FC = () => {
         <CardHeader>
           <CardTitle className="flex items-center">
             <User className="mr-2 h-5 w-5" />
-            Podsumowanie konta
+            Dane konta
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
@@ -118,7 +138,7 @@ export const RegisterStep4: React.FC = () => {
         </CardContent>
       </Card>
 
-      {/* Instrukcje email */}
+      {/* Instrukcje */}
       <Card className="border-blue-200">
         <CardHeader>
           <CardTitle className="flex items-center text-blue-800">
@@ -135,7 +155,7 @@ export const RegisterStep4: React.FC = () => {
               <div>
                 <p className="font-medium">Sprawdź swoją skrzynkę mailową</p>
                 <p className="text-gray-600">
-                  Email potwierdzający został wysłany na adres <strong>{email}</strong>
+                  Email został wysłany na adres <strong>{email}</strong>
                 </p>
               </div>
             </div>
@@ -145,9 +165,11 @@ export const RegisterStep4: React.FC = () => {
                 2
               </div>
               <div>
-                <p className="font-medium">Kliknij link w emailu</p>
+                <p className="font-medium">Kliknij link aktywacyjny</p>
                 <p className="text-gray-600">
-                  Aktywuj swoje konto klikając w link potwierdzający
+                  {isNewRegistration 
+                    ? "Aktywuj swoje konto klikając w link w emailu" 
+                    : "Jeśli konto nie jest aktywne, kliknij w link w emailu"}
                 </p>
               </div>
             </div>
@@ -165,9 +187,9 @@ export const RegisterStep4: React.FC = () => {
             </div>
           </div>
 
-          <Alert>
-            <Clock className="h-4 w-4" />
-            <AlertDescription>
+          <Alert className="border-yellow-200 bg-yellow-50">
+            <AlertCircle className="h-4 w-4 text-yellow-600" />
+            <AlertDescription className="text-yellow-800">
               <strong>Ważne:</strong> Email może dotrzeć w ciągu kilku minut. 
               Sprawdź także folder SPAM/Niechciane.
             </AlertDescription>
@@ -176,6 +198,16 @@ export const RegisterStep4: React.FC = () => {
       </Card>
 
       {/* Ponowne wysłanie emaila */}
+      {!isNewRegistration && (
+        <Alert className="border-blue-200 bg-blue-50">
+          <AlertCircle className="h-4 w-4 text-blue-600" />
+          <AlertDescription className="text-blue-800">
+            <strong>Konto już istnieje:</strong> Jeśli pamiętasz hasło i już aktywowałeś konto, 
+            możesz od razu przejść do logowania.
+          </AlertDescription>
+        </Alert>
+      )}
+
       <Card>
         <CardContent className="pt-6">
           <div className="text-center space-y-3">
@@ -195,7 +227,7 @@ export const RegisterStep4: React.FC = () => {
             <Button 
               variant="outline" 
               onClick={handleResendEmail}
-              disabled={resendLoading}
+              disabled={resendLoading || resendSuccess}
               className="w-full sm:w-auto"
             >
               {resendLoading && <RefreshCw className="mr-2 h-4 w-4 animate-spin" />}
@@ -225,6 +257,8 @@ export const RegisterStep4: React.FC = () => {
           </a>
         </div>
       </div>
+
+      <FooterBranding className="pt-12" />
     </NarrowCol>
   );
 };

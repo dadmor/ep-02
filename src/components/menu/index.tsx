@@ -1,4 +1,4 @@
-// src/components/Menu.tsx - tylko ta jedna zmiana!
+// src/components/Menu.tsx
 import React from "react";
 import { useLogout, useMenu, useGetIdentity } from "@refinedev/core";
 import { NavLink } from "react-router";
@@ -6,7 +6,7 @@ import { LogOut, Menu as MenuIcon, X } from "lucide-react";
 import { UserMicroProfile } from "../layout/UserMicroProfile";
 import { cn } from "@/utility";
 import { Button, ScrollArea, Separator } from "../ui";
-import { UserData } from "@/operatorTypes";
+import { User } from "@/utility/auth/authProvider";
 
 interface MenuProps {
   onClose?: () => void;
@@ -15,7 +15,7 @@ interface MenuProps {
 export const Menu: React.FC<MenuProps> = ({ onClose }) => {
   const { mutate: logout } = useLogout();
   const { menuItems } = useMenu();
-  const { data: user } = useGetIdentity<UserData>();
+  const { data: user } = useGetIdentity<User>();
 
   const handleNavClick = () => {
     if (onClose) {
@@ -23,10 +23,10 @@ export const Menu: React.FC<MenuProps> = ({ onClose }) => {
     }
   };
 
-  // Pobierz rolę użytkownika
-  const userRole = user?.user_metadata?.role;
+  // Pobierz rolę użytkownika - TERAZ Z GŁÓWNEGO POZIOMU
+  const userRole = user?.role;
 
-  // JEDYNA ZMIANA: Filtruj menu według roli
+  // Filtruj menu według roli
   const filteredMenuItems = menuItems.filter((item) => {
     // Jeśli item nie ma zdefiniowanych ról, pokaż wszystkim
     if (!item.meta?.roles) {
@@ -41,8 +41,8 @@ export const Menu: React.FC<MenuProps> = ({ onClose }) => {
       {/* Header */}
       <div className="flex h-16 items-center justify-between border-b px-6">
         <div className="flex items-center">
-          <MenuIcon className="h-5 w-5 mr-2" />
-          <img src={'/smart-edu-play-logo.svg'} alt="Logo" className=" h-9 " />
+          <MenuIcon className="h-6 w-6 mr-2" />
+          <img src={'/smart-edu-play-logo.svg'} alt="Logo" className="h-9" />
         </div>
         {onClose && (
           <Button

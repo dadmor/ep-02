@@ -3,15 +3,15 @@
 // ====================================================
 import React from "react";
 import { Route } from "react-router-dom";
+import { Book, TrendingUp, Trophy, Medal } from "lucide-react";
+
+// Import komponentów
 import { StudentDashboard } from "./dashboard";
 import StudentLessons from "./ui.Lessons";
 import LessonTake from "./ui.LessonTake";
 import StudentProgress from "./ui.Progress";
 import StudentBadges from "./ui.Badges";
 import StudentRankings from "./ui.Rankings";
-
-// Import komponentów
-
 
 // Export wszystkich komponentów
 export { StudentDashboard } from "./dashboard";
@@ -24,36 +24,40 @@ export { default as StudentRankings } from "./ui.Rankings";
 // Resource definitions dla Refine - student
 export const studentResources = [
   {
-    name: "lessons",
+    name: "student-lessons",
     list: "/student/lessons",
     show: "/student/lessons/:id",
     meta: {
       label: "Lekcje",
-      icon: "📚",
+      icon: <Book className="h-4 w-4" />,
+      roles: ["student"],
     },
   },
   {
-    name: "progress",
+    name: "student-progress",
     list: "/student/progress",
     meta: {
       label: "Moje postępy",
-      icon: "📊",
+      icon: <TrendingUp className="h-4 w-4" />,
+      roles: ["student"],
     },
   },
   {
-    name: "badges",
+    name: "student-badges",
     list: "/student/badges",
     meta: {
       label: "Odznaki",
-      icon: "🏆",
+      icon: <Trophy className="h-4 w-4" />,
+      roles: ["student"],
     },
   },
   {
-    name: "rankings",
+    name: "student-rankings",
     list: "/student/rankings",
     meta: {
       label: "Ranking",
-      icon: "🏅",
+      icon: <Medal className="h-4 w-4" />,
+      roles: ["student"],
     },
   },
 ];
@@ -76,5 +80,3 @@ export const studentRoutes = [
   // Rankings
   <Route key="student-rankings" path="/student/rankings" element={<StudentRankings />} />,
 ];
-
-

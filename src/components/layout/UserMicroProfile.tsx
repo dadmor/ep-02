@@ -1,17 +1,32 @@
 import { useGetIdentity } from "@refinedev/core";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { User } from "lucide-react";
-import { UserData } from "@/operatorTypes";
 
-
+// Interfejs zgodny z typem User z authProvider
+interface User {
+  id: string;
+  email: string;
+  role: string;
+  created_at: string;
+  updated_at: string;
+  first_name?: string;
+  last_name?: string;
+  phone_number?: string;
+  city?: string;
+  postal_code?: string;
+  name?: string;
+  street_address?: string;
+  operator_id?: string;
+  _timestamp?: number;
+}
 
 interface UserProfileProps {
   className?: string;
 }
 
 export const UserMicroProfile: React.FC<UserProfileProps> = ({ className }) => {
-  const { data: user, isLoading, error } = useGetIdentity<UserData>();
+  const { data: user, isLoading, error } = useGetIdentity<User>();
 
   if (isLoading) {
     return (
@@ -54,7 +69,12 @@ export const UserMicroProfile: React.FC<UserProfileProps> = ({ className }) => {
   }
 
   // Wyciągnij inicjały z imienia i nazwiska lub email
-  const getInitials = (name?: string, email?: string) => {
+  const getInitials = (firstName?: string, lastName?: string, name?: string, email?: string) => {
+    // Najpierw spróbuj z first_name i last_name
+    if (firstName && lastName) {
+      return `${firstName[0]}${lastName[0]}`.toUpperCase();
+    }
+    // Potem z name
     if (name) {
       return name
         .split(" ")
@@ -63,22 +83,46 @@ export const UserMicroProfile: React.FC<UserProfileProps> = ({ className }) => {
         .toUpperCase()
         .slice(0, 2);
     }
+    // Na końcu z email
     if (email) {
       return email.slice(0, 2).toUpperCase();
     }
     return "U";
   };
 
-  const displayName = user.name || user.email || "Użytkownik";
-  const initials = getInitials(user.name, user.email);
+  // Konstruuj pełne imię
+  const getDisplayName = () => {
+    if (user.first_name && user.last_name) {
+      return `${user.first_name} ${user.last_name}`;
+    }
+    if (user.name) {
+      return user.name;
+    }
+    if (user.email) {
+      return user.email;
+    }
+    return "Użytkownik";
+  };
 
-  // Rola znajduje się w user_metadata
-  const role = user.user_metadata?.role;
+  const displayName = getDisplayName();
+  const initials = getInitials(user.first_name, user.last_name, user.name, user.email);
+
+  // Mapowanie ról na czytelne nazwy
+  const getRoleDisplayName = (role: string) => {
+    const roleMap: Record<string, string> = {
+      admin: "Administrator",
+      operator: "Operator",
+      supervisor: "Supervisor",
+      user: "Użytkownik",
+      driver: "Kierowca",
+      customer: "Klient"
+    };
+    return roleMap[role] || role;
+  };
 
   return (
     <div className={`flex items-center space-x-3 p-3 ${className}`}>
       <Avatar className="h-10 w-10">
-        <AvatarImage src={user.avatar} alt={displayName} />
         <AvatarFallback className="bg-primary text-primary-foreground">
           {initials}
         </AvatarFallback>
@@ -87,7 +131,7 @@ export const UserMicroProfile: React.FC<UserProfileProps> = ({ className }) => {
         <div className="font-medium text-sm truncate" title={displayName}>
           {displayName}
         </div>
-        {user.email && (
+        {user.email && displayName !== user.email && (
           <div
             className="text-xs text-muted-foreground truncate"
             title={user.email}
@@ -95,9 +139,12 @@ export const UserMicroProfile: React.FC<UserProfileProps> = ({ className }) => {
             {user.email}
           </div>
         )}
-        {role && (
-          <div className="text-xs text-muted-foreground truncate" title={role}>
-            Rola: {role}
+        {user.role && (
+          <div 
+            className="text-xs text-muted-foreground truncate" 
+            title={`Rola: ${getRoleDisplayName(user.role)}`}
+          >
+            {getRoleDisplayName(user.role)}
           </div>
         )}
       </div>

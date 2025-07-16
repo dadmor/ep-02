@@ -3,7 +3,6 @@ import { Authenticated, ErrorComponent, Refine } from "@refinedev/core";
 import routerBindings, {
   CatchAllNavigate,
   DocumentTitleHandler,
-  NavigateToResource,
   UnsavedChangesNotifier,
 } from "@refinedev/react-router";
 import { dataProvider, liveProvider } from "@refinedev/supabase";

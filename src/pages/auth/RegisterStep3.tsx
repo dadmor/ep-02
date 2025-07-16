@@ -1,13 +1,13 @@
-// RegisterStep3.tsx - Uproszczona wersja
+// RegisterStep3.tsx - POPRAWIONA WERSJA bez nieskończonej pętli
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { ArrowLeft, Loader2, Check, Mail, Shield, User, AlertTriangle, KeyRound, UserCheck } from "lucide-react";
+import { ArrowLeft, Loader2, Check, Mail, Shield, User, AlertTriangle, UserCheck } from "lucide-react";
 import { NarrowCol } from "@/components/layout/NarrowCol";
 import { Lead } from "@/components/reader";
-import { useRegistration } from "@/utility/useRegistration"; // Import custom hook
+import { useRegistration } from "@/utility";
 
 export const RegisterStep3: React.FC = () => {
   const navigate = useNavigate();
@@ -20,52 +20,48 @@ export const RegisterStep3: React.FC = () => {
     processData
   } = useRegistration();
 
+  // ✅ Sprawdź czy dane istnieją tylko raz przy montowaniu
+  React.useEffect(() => {
+    if (!processData || !processData.email || !processData.password) {
+      console.warn("⚠️ Brak danych z poprzednich kroków, przekierowuję do kroku 1");
+      navigate("/register/step1");
+    }
+  }, []); // Pusta tablica dependencies - tylko przy montowaniu
+
   const getRoleIcon = (role: string) => {
-    return role === "auditor" ? Shield : User;
+    return role === "teacher" ? Shield : User;
   };
 
   const getRoleLabel = (role: string) => {
-    return role === "auditor" ? "Auditor" : 
-           role === "beneficiary" ? "Beneficjent" : 
-           role === "contractor" ? "Wykonawca" : 
+    return role === "teacher" ? "Nauczyciel" : 
+           role === "student" ? "Uczeń" : 
            "Nieznana rola";
   };
 
-  // Check if data exists
+  // Jeśli dane nie istnieją, pokaż loading (zanim useEffect przekieruje)
   if (!processData || !processData.email) {
     return (
-     <>
-     
-     
-      <Lead title="Rejestracja" description="Błąd - brak danych" />
-     <Alert variant="destructive">
-       <AlertTriangle className="h-4 w-4" />
-       <AlertDescription>
-         Brak danych rejestracji. Rozpocznij proces od początku.
-       </AlertDescription>
-     </Alert>
-     <Button onClick={() => navigate("/register/step1")} className="mt-4">
-       Wróć do kroku 1
-     </Button></>
-       
-    
+      <NarrowCol>
+        <div className="flex items-center justify-center p-8">
+          <Loader2 className="h-8 w-8 animate-spin" />
+          <span className="ml-2">Ładowanie...</span>
+        </div>
+      </NarrowCol>
     );
   }
 
   return (
     <NarrowCol>
-
-<div className="flex items-start gap-5 ">
+      <div className="flex items-start gap-5">
         <UserCheck className="mt-2 bg-white rounded-full p-2 w-12 h-12" />
-        <Lead title={`Rejestracja`} description={`3 z 4 Potwierdzenie danych`} />
+        <Lead title="Rejestracja" description="3 z 3 Potwierdzenie danych" />
       </div>
-      
 
       {isSuccess && (
         <Alert className="mb-4 border-green-200 bg-green-50">
           <Check className="h-4 w-4 text-green-600" />
           <AlertDescription className="text-green-800">
-            <strong>Rejestracja udana!</strong> Za chwilę zostaniesz przekierowany...
+            <strong>Sukces!</strong> Za chwilę zostaniesz przekierowany do podsumowania...
           </AlertDescription>
         </Alert>
       )}
@@ -87,15 +83,14 @@ export const RegisterStep3: React.FC = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-
-        <div className="bg-blue-50 p-4 rounded-lg">
+          <div className="bg-blue-50 p-4 rounded-lg">
             <p className="text-sm text-blue-800 font-medium">
-              Co się stanie:
+              Co się stanie po kliknięciu "Zarejestruj się":
             </p>
             <ul className="text-sm text-blue-700 mt-2 space-y-1">
-              <li>• Konto zostanie utworzone</li>
-              <li>• Otrzymasz email z potwierdzeniem</li>
-              <li>• Po aktywacji będziesz mógł się zalogować</li>
+              <li>• Twoje konto zostanie utworzone</li>
+              <li>• Otrzymasz email z linkiem aktywacyjnym</li>
+              <li>• Po kliknięciu w link będziesz mógł się zalogować</li>
             </ul>
           </div>
 
@@ -121,18 +116,22 @@ export const RegisterStep3: React.FC = () => {
             </div>
           </div>
 
-         
+          {/* Informacja o haśle */}
+          <div className="bg-gray-50 p-3 rounded-lg">
+            <p className="text-sm text-gray-600">
+              <strong>Hasło:</strong> {"•".repeat(processData.password?.length || 8)}
+            </p>
+          </div>
 
           {error && !isSuccess && (
             <div className="bg-red-50 p-4 rounded-lg border border-red-200">
               <p className="text-sm text-red-800 font-medium">
-                Wskazówki w przypadku problemów:
+                Wskazówki:
               </p>
               <ul className="text-sm text-red-700 mt-2 space-y-1">
-                <li>• Sprawdź czy email ma prawidłowy format</li>
-                <li>• Upewnij się że hasło spełnia wymagania (6-72 znaków)</li>
-                <li>• Jeśli masz już konto, przejdź do logowania</li>
-                <li>• W przypadku dalszych problemów skontaktuj się z pomocą</li>
+                <li>• Sprawdź czy podany email nie jest już zarejestrowany</li>
+                <li>• Upewnij się że hasło ma co najmniej 6 znaków</li>
+                <li>• Spróbuj z innym adresem email</li>
               </ul>
             </div>
           )}
@@ -152,10 +151,11 @@ export const RegisterStep3: React.FC = () => {
         <Button 
           onClick={register} 
           disabled={isLoading || isSuccess}
+          variant={error ? "destructive" : "default"}
         >
           {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           {isLoading ? "Rejestruję..." : 
-           isSuccess ? "Udane!" :
+           isSuccess ? "Zarejestrowano!" :
            error ? "Spróbuj ponownie" : "Zarejestruj się"}
         </Button>
       </div>

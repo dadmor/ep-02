@@ -1,4 +1,4 @@
-// RegisterStep2.tsx - POPRAWIONE
+// RegisterStep2.tsx - Poprawiona wersja
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,15 +6,28 @@ import { ArrowLeft, KeyRound } from "lucide-react";
 import { SchemaForm } from "@/components/SchemaForm";
 import { NarrowCol } from "@/components/layout/NarrowCol";
 import { Lead } from "@/components/reader";
-import { useFormSchemaStore } from "@/utility/formSchemaStore"; // ✅ Dodano import
+import { useFormSchemaStore } from "@/utility/formSchemaStore";
 import { FooterBranding } from "./FooterBranding";
 
 export const RegisterStep2: React.FC = () => {
   const navigate = useNavigate();
-  const { setData } = useFormSchemaStore(); // ✅ Dodano setData
+  const { setData, getData } = useFormSchemaStore();
+
+  // Sprawdź czy mamy dane z kroku 1
+  React.useEffect(() => {
+    const currentData = getData("registration");
+    if (!currentData || !currentData.email || !currentData.role) {
+      navigate("/register/step1");
+    }
+  }, [getData, navigate]);
 
   const handleSubmit = (data: any) => {
-    setData("registration", data);
+    // Kumuluj dane z poprzedniego kroku
+    const currentData = getData("registration");
+    setData("registration", {
+      ...currentData,
+      ...data
+    });
     navigate("/register/step3");
   };
 
@@ -24,14 +37,14 @@ export const RegisterStep2: React.FC = () => {
 
   return (
     <NarrowCol>
-     
-      <div className="flex items-start gap-5 ">
+      <div className="flex items-start gap-5">
         <KeyRound className="mt-2 bg-white rounded-full p-2 w-12 h-12" />
         <Lead
-          title={`Rejestracja`}
-          description={`2 z 3 Ustaw hasło do konta`}
+          title="Rejestracja"
+          description="2 z 3 Ustaw hasło do konta"
         />
       </div>
+      
       <SchemaForm
         schemaPath="registration.step2"
         onSubmit={handleSubmit}
@@ -51,7 +64,7 @@ export const RegisterStep2: React.FC = () => {
           Masz już konto? Zaloguj się
         </a>
       </div>
-      {/* Logo z opisem w stylu stopki */}
+      
       <FooterBranding className="pt-12" />
     </NarrowCol>
   );

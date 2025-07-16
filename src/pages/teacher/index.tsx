@@ -30,6 +30,7 @@ import BadgeShow from "./ui.BadgeShow";      // DODANE
 import ErrorAnalysis from "./ui.ErrorAnalysis";
 import Rankings from "./ui.Rankings";
 import ArticleEdit from "./ui.ArticleEdit";
+import { ro } from "date-fns/locale";
 
 // Export wszystkich komponentów
 export { TeacherDashboard } from "./dashboard";
@@ -71,6 +72,7 @@ export const teacherResources = [
     meta: {
       label: "Lekcje",
       icon: "📚",
+      roles: ["teacher"],
     },
   },
   {
@@ -82,6 +84,7 @@ export const teacherResources = [
     meta: {
       label: "Artykuły",
       icon: "📄",
+      roles: ["teacher"],
     },
   },
   {
@@ -93,6 +96,7 @@ export const teacherResources = [
     meta: {
       label: "Zadania",
       icon: "📝",
+      roles: ["teacher"],
     },
   },
   {
@@ -104,6 +108,7 @@ export const teacherResources = [
     meta: {
       label: "Klasy",
       icon: "🎓",
+      roles: ["teacher"],
     },
   },
   {
@@ -113,6 +118,7 @@ export const teacherResources = [
     meta: {
       label: "Uczniowie",
       icon: "👥",
+      roles: ["teacher"],
     },
   },
   {
@@ -122,6 +128,7 @@ export const teacherResources = [
     meta: {
       label: "Postępy uczniów",
       icon: "📊",
+      roles: ["teacher"],
     },
   },
   {
@@ -133,6 +140,7 @@ export const teacherResources = [
     meta: {
       label: "Odznaki",
       icon: "🏆",
+      roles: ["teacher"],
     },
   },
   {
@@ -142,6 +150,7 @@ export const teacherResources = [
     meta: {
       label: "Zapisy do klas",
       icon: "📋",
+      roles: ["teacher"],
     },
   },
   {
@@ -151,6 +160,7 @@ export const teacherResources = [
     meta: {
       label: "Lekcje w klasach",
       icon: "📖",
+      roles: ["teacher"],
     },
   },
   {
@@ -159,6 +169,7 @@ export const teacherResources = [
     meta: {
       label: "Analiza błędów",
       icon: "🔍",
+      roles: ["teacher"],
     },
   },
   {
@@ -167,6 +178,7 @@ export const teacherResources = [
     meta: {
       label: "Rankingi",
       icon: "🏅",
+      roles: ["teacher"],
     },
   },
 ];
