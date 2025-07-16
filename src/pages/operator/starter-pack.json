@@ -1,0 +1,243 @@
+{
+  "version": "2.0.0",
+  "exportedAt": "2024-01-15T10:00:00Z",
+  "metadata": {
+    "description": "Starter pack - przykładowe lekcje dla każdego poziomu",
+    "targetAudience": "liceum"
+  },
+  "classes": [
+    {
+      "name": "Matematyka podstawowa - klasa 1",
+      "grade": "1",
+      "education_year": 9999,
+      "description": "Fundamenty wiedzy matematycznej",
+      "lessons": [
+        {
+          "title": "Zbiory liczbowe - wprowadzenie",
+          "description": "Poznajemy podstawowe zbiory liczb",
+          "subject": "matematyka",
+          "education_level": "podstawowy",
+          "grade": "1",
+          "topic": "Liczby rzeczywiste",
+          "sequenceNumber": 1,
+          "estimatedTime": 45,
+          "difficulty": "easy",
+          "articles": [
+            {
+              "title": "Czym są zbiory liczbowe?",
+              "content": "# Zbiory liczbowe\n\n## Wprowadzenie\n\nW matematyce wyróżniamy kilka podstawowych zbiorów liczb:\n\n### 1. Liczby naturalne (ℕ)\nTo liczby, których używamy do liczenia: 1, 2, 3, 4, 5...\n\n### 2. Liczby całkowite (ℤ)\nLiczby naturalne wraz z zerem i liczbami ujemnymi: ...-3, -2, -1, 0, 1, 2, 3...\n\n### 3. Liczby wymierne (ℚ)\nLiczby, które można zapisać jako ułamek zwykły: 1/2, 3/4, -5/3\n\n### 4. Liczby niewymierne\nLiczby, których nie da się zapisać jako ułamek: π, √2, e\n\n### 5. Liczby rzeczywiste (ℝ)\nWszystkie liczby wymierne i niewymierne razem.",
+              "sort_order": 1,
+              "contentType": "theory"
+            }
+          ],
+          "tasks": [
+            {
+              "type": "single_choice",
+              "question_text": "Która z poniższych liczb jest niewymierna?",
+              "options": ["3.14", "22/7", "√2", "0.333..."],
+              "correct_answer": "√2",
+              "explanation": "Liczba niewymierna to taka, której nie można zapisać w postaci ułamka a/b, gdzie a i b są liczbami całkowitymi. Pierwiastek kwadratowy z 2 jest klasycznym przykładem liczby niewymiernej - jego rozwinięcie dziesiętne jest nieskończone i nieokresowe.",
+              "xp_reward": 10,
+              "difficulty": "easy"
+            },
+            {
+              "type": "true_false",
+              "question_text": "Każda liczba całkowita jest również liczbą wymierną.",
+              "options": ["Prawda", "Fałsz"],
+              "correct_answer": "Prawda",
+              "explanation": "Liczba wymierna to liczba, którą można przedstawić jako iloraz dwóch liczb całkowitych (gdzie dzielnik jest różny od zera). Każdą liczbę całkowitą n można zapisać jako n/1, co pokazuje, że jest ona liczbą wymierną.",
+              "xp_reward": 10,
+              "difficulty": "easy"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Język polski podstawowy - klasa 1",
+      "grade": "1",
+      "education_year": 9999,
+      "description": "Podstawy literatury i kultury",
+      "lessons": [
+        {
+          "title": "Mity greckie - wprowadzenie",
+          "description": "Podstawowe mity i ich znaczenie",
+          "subject": "polski",
+          "education_level": "podstawowy",
+          "grade": "1",
+          "topic": "Starożytność",
+          "sequenceNumber": 1,
+          "estimatedTime": 45,
+          "difficulty": "easy",
+          "articles": [
+            {
+              "title": "Czym jest mit?",
+              "content": "# Mitologia grecka\n\n## Definicja mitu\n\nMit to opowieść o charakterze religijnym lub filozoficznym, która wyjaśnia pochodzenie świata, bogów i ludzi.\n\n## Funkcje mitów:\n- **Objaśniająca** - tłumaczy zjawiska naturalne\n- **Wychowawcza** - przekazuje wartości moralne\n- **Integrująca** - jednoczy społeczność\n\n## Najważniejsze mity greckie:\n1. Mit o Prometeuszu\n2. Mit o puszce Pandory\n3. Mit o Syzyfie\n4. Mit o Dedalu i Ikarze",
+              "sort_order": 1,
+              "contentType": "theory"
+            }
+          ],
+          "tasks": [
+            {
+              "type": "single_choice",
+              "question_text": "Który z greckich herosów ukradł ogień bogom?",
+              "options": ["Herkules", "Prometeusz", "Tezeusz", "Perseusz"],
+              "correct_answer": "Prometeusz",
+              "explanation": "Mit o kradzieży ognia to jedna z najważniejszych opowieści w mitologii greckiej. Symbolizuje ona dążenie człowieka do wiedzy i postępu cywilizacyjnego. Bohater tego mitu został surowo ukarany przez Zeusa - przykuty do skały, gdzie orzeł codziennie wyjadał mu wątrobę.",
+              "xp_reward": 10,
+              "difficulty": "easy"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Matematyka podstawowa - klasa 2",
+      "grade": "2",
+      "education_year": 9999,
+      "description": "Rozwijanie umiejętności matematycznych",
+      "lessons": [
+        {
+          "title": "Postać ogólna funkcji kwadratowej",
+          "description": "Wprowadzenie do funkcji kwadratowych",
+          "subject": "matematyka",
+          "education_level": "podstawowy",
+          "grade": "2",
+          "topic": "Funkcje kwadratowe",
+          "sequenceNumber": 1,
+          "estimatedTime": 60,
+          "difficulty": "medium",
+          "articles": [
+            {
+              "title": "Funkcja kwadratowa - definicja",
+              "content": "# Funkcja kwadratowa\n\n## Postać ogólna\n\nFunkcja kwadratowa to funkcja postaci:\n\n**f(x) = ax² + bx + c**\n\ngdzie:\n- a ≠ 0 (współczynnik przy x²)\n- b - współczynnik przy x\n- c - wyraz wolny\n\n## Wykres\n\nWykresem funkcji kwadratowej jest **parabola**.\n\n### Własności wykresu:\n- Jeśli a > 0 - ramiona paraboli skierowane w górę\n- Jeśli a < 0 - ramiona paraboli skierowane w dół\n- |a| wpływa na 'szerokość' paraboli",
+              "sort_order": 1,
+              "contentType": "theory"
+            }
+          ],
+          "tasks": [
+            {
+              "type": "single_choice",
+              "question_text": "Która z funkcji jest funkcją kwadratową?",
+              "options": ["f(x) = 2x + 3", "f(x) = x² - 5x + 6", "f(x) = 1/x", "f(x) = x³ + 2"],
+              "correct_answer": "f(x) = x² - 5x + 6",
+              "explanation": "Funkcja kwadratowa charakteryzuje się tym, że najwyższa potęga zmiennej x wynosi dokładnie 2. Współczynnik przy x² nie może być równy zero. W postaci ogólnej f(x) = ax² + bx + c możemy mieć b = 0 lub c = 0, ale a ≠ 0.",
+              "xp_reward": 15,
+              "difficulty": "medium"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Matematyka podstawowa - klasa 3",
+      "grade": "3",
+      "education_year": 9999,
+      "description": "Przygotowanie do matury podstawowej",
+      "lessons": [
+        {
+          "title": "Prawdopodobieństwo klasyczne",
+          "description": "Definicja klasyczna prawdopodobieństwa",
+          "subject": "matematyka",
+          "education_level": "podstawowy",
+          "grade": "3",
+          "topic": "Rachunek prawdopodobieństwa",
+          "sequenceNumber": 1,
+          "estimatedTime": 60,
+          "difficulty": "hard",
+          "articles": [
+            {
+              "title": "Definicja klasyczna prawdopodobieństwa",
+              "content": "# Prawdopodobieństwo klasyczne\n\n## Definicja\n\nJeżeli:\n- Ω - zbiór wszystkich możliwych wyników (przestrzeń zdarzeń elementarnych)\n- |Ω| = n - liczba wszystkich możliwych wyników\n- A - zdarzenie\n- |A| = k - liczba wyników sprzyjających zdarzeniu A\n\nTo prawdopodobieństwo zdarzenia A wynosi:\n\n**P(A) = |A| / |Ω| = k/n**\n\n## Własności:\n- 0 ≤ P(A) ≤ 1\n- P(Ω) = 1 (zdarzenie pewne)\n- P(∅) = 0 (zdarzenie niemożliwe)",
+              "sort_order": 1,
+              "contentType": "theory"
+            }
+          ],
+          "tasks": [
+            {
+              "type": "single_choice",
+              "question_text": "Jakie jest prawdopodobieństwo wyrzucenia parzystej liczby oczek na kostce?",
+              "options": ["1/6", "1/3", "1/2", "2/3"],
+              "correct_answer": "1/2",
+              "explanation": "W rachunku prawdopodobieństwa klasycznego obliczamy stosunek liczby zdarzeń sprzyjających do liczby wszystkich możliwych zdarzeń. Standardowa kostka do gry ma 6 ścian z liczbami od 1 do 6. Aby obliczyć prawdopodobieństwo, należy określić które wyniki spełniają warunek zadania i podzielić ich liczbę przez 6.",
+              "xp_reward": 20,
+              "difficulty": "hard"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Matematyka rozszerzona - klasa 3",
+      "grade": "3",
+      "education_year": 9999,
+      "description": "Przygotowanie do matury rozszerzonej",
+      "lessons": [
+        {
+          "title": "Granice funkcji",
+          "description": "Wprowadzenie do granic",
+          "subject": "matematyka",
+          "education_level": "rozszerzony",
+          "grade": "3",
+          "topic": "Rachunek różniczkowy",
+          "estimatedTime": 90,
+          "difficulty": "hard",
+          "articles": [
+            {
+              "title": "Pojęcie granicy funkcji",
+              "content": "# Granice funkcji\n\n## Intuicyjne rozumienie granicy\n\nGranica funkcji w punkcie to wartość, do której funkcja \"dąży\" gdy argument zbliża się do tego punktu.",
+              "sort_order": 1
+            }
+          ],
+          "tasks": [
+            {
+              "type": "open_question",
+              "question_text": "Oblicz granicę: lim(x→2) (x² - 4)/(x - 2)",
+              "correct_answer": "4",
+              "explanation": "Stosując przekształcenie: (x² - 4)/(x - 2) = (x-2)(x+2)/(x-2) = x+2, otrzymujemy lim(x→2) (x+2) = 4",
+              "xp_reward": 25,
+              "difficulty": "medium"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "badges": [
+    {
+      "name": "Pierwszak",
+      "description": "Ukończ pierwszą lekcję w klasie 1",
+      "category": "milestone",
+      "criteria": [
+        {
+          "criteria_type": "lessons_completed",
+          "criteria_value": 1
+        }
+      ]
+    },
+    {
+      "name": "Mistrz Klasy 1",
+      "description": "Ukończ wszystkie lekcje w klasie 1",
+      "category": "class_completion",
+      "unlockCriteria": "100% ukończenia klasy 1",
+      "criteria": [
+        {
+          "criteria_type": "class_progress",
+          "criteria_value": 100
+        }
+      ]
+    },
+    {
+      "name": "Maturzysta z matematyki",
+      "description": "Ukończ cały kurs matematyki podstawowej",
+      "category": "class_completion",
+      "unlockCriteria": "Zdobądź 100% postępu we wszystkich klasach matematyki podstawowej",
+      "criteria": [
+        {
+          "criteria_type": "subject_completion",
+          "criteria_value": 100
+        }
+      ]
+    }
+  ]
+}

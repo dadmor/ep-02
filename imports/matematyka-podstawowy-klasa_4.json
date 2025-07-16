@@ -1,0 +1,200 @@
+{
+    "version": "2.0.0",
+    "exportedAt": "2024-01-15T10:00:00Z",
+    "metadata": {
+      "description": "Kurs matematyka na poziomie podstawowy dla klasy 4 liceum",
+      "targetAudience": "liceum"
+    },
+    "classes": [
+      {
+        "name": "matematyka podstawowy - klasa 4",
+        "grade": "4",
+        "education_year": 9999,
+        "description": "Szczegółowy opis programu nauczania",
+        "lessons": [
+          {
+            "title": "Liczby rzeczywiste i ich własności",
+            "description": "Wprowadzenie do liczb rzeczywistych i działań na nich.",
+            "subject": "matematyka",
+            "education_level": "podstawowy",
+            "grade": "4",
+            "topic": "Liczby rzeczywiste",
+            "sequenceNumber": 1,
+            "estimatedTime": 45,
+            "difficulty": "easy",
+            "articles": [
+              {
+                "title": "Definicja liczb rzeczywistych",
+                "content": "# Liczby rzeczywiste\n\nLiczby rzeczywiste obejmują liczby wymierne i niewymierne.",
+                "sort_order": 1,
+                "contentType": "theory"
+              },
+              {
+                "title": "Działania na liczbach rzeczywistych",
+                "content": "# Działania\n\nDodawanie, odejmowanie, mnożenie i dzielenie liczb rzeczywistych.",
+                "sort_order": 2,
+                "contentType": "theory"
+              },
+              {
+                "title": "Porównywanie liczb",
+                "content": "# Porównywanie\n\nJak porównywać wartości liczb rzeczywistych.",
+                "sort_order": 3,
+                "contentType": "theory"
+              }
+            ],
+            "tasks": [
+              {
+                "type": "single_choice",
+                "question_text": "Która z poniższych liczb jest niewymierna?",
+                "options": ["4", "2/3", "√2", "0.5"],
+                "correct_answer": "√2",
+                "explanation": "Pierwiastek z 2 jest niewymierny.",
+                "xp_reward": 10,
+                "difficulty": "easy"
+              },
+              {
+                "type": "single_choice",
+                "question_text": "Wynik działania 2 + 3.5 to:",
+                "options": ["5", "5.5", "6", "4.5"],
+                "correct_answer": "5.5",
+                "explanation": "2 + 3.5 = 5.5.",
+                "xp_reward": 10,
+                "difficulty": "easy"
+              },
+              {
+                "type": "single_choice",
+                "question_text": "Liczba -3 jest:",
+                "options": ["dodatnia", "ujemna", "zerem", "niewymierna"],
+                "correct_answer": "ujemna",
+                "explanation": "Liczba mniejsza od zera jest ujemna.",
+                "xp_reward": 10,
+                "difficulty": "easy"
+              }
+            ]
+          },
+          {
+            "title": "Wyrażenia algebraiczne",
+            "description": "Podstawy pracy z wyrażeniami algebraicznymi.",
+            "subject": "matematyka",
+            "education_level": "podstawowy",
+            "grade": "4",
+            "topic": "Algebra",
+            "sequenceNumber": 2,
+            "estimatedTime": 45,
+            "difficulty": "medium",
+            "articles": [
+              {
+                "title": "Co to jest wyrażenie algebraiczne",
+                "content": "# Wyrażenie algebraiczne\n\nTo połączenie liczb, liter i działań matematycznych.",
+                "sort_order": 1,
+                "contentType": "theory"
+              },
+              {
+                "title": "Redukcja wyrazów podobnych",
+                "content": "# Redukcja wyrazów\n\nJak upraszczać wyrażenia przez łączenie podobnych wyrazów.",
+                "sort_order": 2,
+                "contentType": "theory"
+              },
+              {
+                "title": "Wartość wyrażenia",
+                "content": "# Wartość\n\nPodstawianie wartości zmiennych.",
+                "sort_order": 3,
+                "contentType": "theory"
+              }
+            ],
+            "tasks": [
+              {
+                "type": "single_choice",
+                "question_text": "Które z poniższych jest wyrażeniem algebraicznym?",
+                "options": ["2x + 3", "7", "x=5", "2+2"],
+                "correct_answer": "2x + 3",
+                "explanation": "Zawiera zmienną.",
+                "xp_reward": 10,
+                "difficulty": "medium"
+              },
+              {
+                "type": "single_choice",
+                "question_text": "Ile wynosi suma 3x + 2x?",
+                "options": ["5x", "6x", "x", "4x"],
+                "correct_answer": "5x",
+                "explanation": "3x + 2x = 5x.",
+                "xp_reward": 10,
+                "difficulty": "medium"
+              },
+              {
+                "type": "single_choice",
+                "question_text": "Który element jest stałą w wyrażeniu 4x + 7?",
+                "options": ["4", "x", "7", "4x"],
+                "correct_answer": "7",
+                "explanation": "Stała to liczba bez zmiennej.",
+                "xp_reward": 10,
+                "difficulty": "medium"
+              }
+            ]
+          },
+          {
+            "title": "Równania liniowe z jedną niewiadomą",
+            "description": "Nauka rozwiązywania równań liniowych.",
+            "subject": "matematyka",
+            "education_level": "podstawowy",
+            "grade": "4",
+            "topic": "Równania",
+            "sequenceNumber": 3,
+            "estimatedTime": 45,
+            "difficulty": "medium",
+            "articles": [
+              {
+                "title": "Definicja równania liniowego",
+                "content": "# Równanie liniowe\n\nMa postać ax + b = 0.",
+                "sort_order": 1,
+                "contentType": "theory"
+              },
+              {
+                "title": "Metody rozwiązywania równań",
+                "content": "# Rozwiązywanie\n\nPrzenoszenie wyrazów i dzielenie przez współczynnik przy x.",
+                "sort_order": 2,
+                "contentType": "theory"
+              },
+              {
+                "title": "Sprawdzanie poprawności rozwiązania",
+                "content": "# Sprawdzanie\n\nPodstawienie wyniku do równania.",
+                "sort_order": 3,
+                "contentType": "theory"
+              }
+            ],
+            "tasks": [
+              {
+                "type": "single_choice",
+                "question_text": "Rozwiązaniem równania x + 3 = 5 jest:",
+                "options": ["2", "3", "5", "8"],
+                "correct_answer": "2",
+                "explanation": "x=5-3=2.",
+                "xp_reward": 10,
+                "difficulty": "medium"
+              },
+              {
+                "type": "single_choice",
+                "question_text": "Równanie 2x=8 ma rozwiązanie:",
+                "options": ["x=4", "x=2", "x=6", "x=8"],
+                "correct_answer": "x=4",
+                "explanation": "x=8/2=4.",
+                "xp_reward": 10,
+                "difficulty": "medium"
+              },
+              {
+                "type": "single_choice",
+                "question_text": "Ile wynosi x w równaniu 3x-3=0?",
+                "options": ["1", "2", "3", "0"],
+                "correct_answer": "1",
+                "explanation": "3x=3, x=1.",
+                "xp_reward": 10,
+                "difficulty": "medium"
+              }
+            ]
+          }
+            ]
+      }
+    ],
+    "badges": []
+  }
+  

@@ -1,0 +1,112 @@
+{
+  "version": "2.0.0",
+  "exportedAt": "2024-01-15T10:00:00Z",
+  "metadata": {
+    "description": "Kompletny kurs przygotowujący do matury z matematyki",
+    "targetAudience": "liceum"
+  },
+  "classes": [
+    {
+      "name": "Matematyka podstawowa - klasa 3",
+      "grade": "3",
+      "education_year": 9999,
+      "description": "Kurs przygotowujący do matury podstawowej z matematyki",
+      "lessons": [
+        {
+          "title": "Funkcje kwadratowe - teoria i zastosowania",
+          "description": "Kompleksowe omówienie funkcji kwadratowych na poziomie maturalnym",
+          "subject": "matematyka",
+          "education_level": "podstawowy",
+          "grade": "3",
+          "topic": "Funkcje",
+          "estimatedTime": 90,
+          "difficulty": "medium",
+          "sequenceNumber": 1,
+          "articles": [
+            {
+              "title": "Wprowadzenie do funkcji kwadratowej",
+              "content": "# Funkcja kwadratowa\n\n## Definicja\n\nFunkcja kwadratowa to funkcja postaci:\n\n**f(x) = ax² + bx + c**\n\ngdzie a ≠ 0.\n\n## Własności\n\n- Dziedziną funkcji kwadratowej jest zbiór liczb rzeczywistych ℝ\n- Wykresem jest parabola\n- Wierzchołek paraboli ma współrzędne W = (p, q), gdzie:\n  - p = -b/(2a)\n  - q = -Δ/(4a), gdzie Δ = b² - 4ac\n\n## Postaci funkcji kwadratowej\n\n1. **Postać ogólna**: f(x) = ax² + bx + c\n2. **Postać kanoniczna**: f(x) = a(x - p)² + q\n3. **Postać iloczynowa**: f(x) = a(x - x₁)(x - x₂)",
+              "sort_order": 1,
+              "contentType": "theory"
+            },
+            {
+              "title": "Miejsca zerowe funkcji kwadratowej",
+              "content": "## Miejsca zerowe funkcji kwadratowej\n\n### Definicja\n\nMiejsca zerowe to wartości x, dla których f(x) = 0.\n\n### Wyznaczanie miejsc zerowych\n\n1. **Obliczamy wyróżnik (deltę)**: Δ = b² - 4ac\n2. **Analizujemy znak delty**:\n   - Jeśli Δ > 0: funkcja ma dwa miejsca zerowe\n   - Jeśli Δ = 0: funkcja ma jedno miejsce zerowe (podwójne)\n   - Jeśli Δ < 0: funkcja nie ma miejsc zerowych\n\n### Wzory na miejsca zerowe\n\nGdy Δ ≥ 0:\n- x₁ = (-b - √Δ) / (2a)\n- x₂ = (-b + √Δ) / (2a)",
+              "sort_order": 2,
+              "contentType": "theory"
+            }
+          ],
+          "tasks": [
+            {
+              "type": "single_choice",
+              "question_text": "Ile miejsc zerowych ma funkcja f(x) = x² - 4x + 4?",
+              "options": ["0", "1", "2", "3"],
+              "correct_answer": "1",
+              "explanation": "Obliczamy wyróżnik: Δ = b² - 4ac = (-4)² - 4·1·4 = 16 - 16 = 0. Ponieważ Δ = 0, funkcja ma dokładnie jedno miejsce zerowe (podwójne). Możemy też zauważyć, że f(x) = (x - 2)², więc x = 2 jest jedynym miejscem zerowym.",
+              "xp_reward": 15,
+              "difficulty": "medium"
+            },
+            {
+              "type": "open_question",
+              "question_text": "Wyznacz współrzędne wierzchołka paraboli będącej wykresem funkcji f(x) = x² - 4x + 1",
+              "correct_answer": "(2,-3)",
+              "explanation": "Współrzędne wierzchołka W = (p, q) obliczamy ze wzorów:\np = -b/(2a) = -(-4)/(2·1) = 4/2 = 2\nq = f(p) = f(2) = 2² - 4·2 + 1 = 4 - 8 + 1 = -3\nOdpowiedź: W = (2, -3)",
+              "xp_reward": 20,
+              "difficulty": "medium"
+            },
+            {
+              "type": "multiple_choice",
+              "question_text": "Które z poniższych stwierdzeń o funkcji f(x) = -2x² + 8x - 6 są prawdziwe?",
+              "options": [
+                "Ramiona paraboli skierowane są w dół",
+                "Funkcja przyjmuje wartość największą",
+                "Wierzchołek paraboli znajduje się w punkcie (2, 2)",
+                "Funkcja ma dwa różne miejsca zerowe"
+              ],
+              "correct_answer": "Ramiona paraboli skierowane są w dół,Funkcja przyjmuje wartość największą,Wierzchołek paraboli znajduje się w punkcie (2, 2)",
+              "explanation": "Analizujemy funkcję f(x) = -2x² + 8x - 6:\n1. a = -2 < 0, więc ramiona skierowane w dół - PRAWDA\n2. Ponieważ a < 0, funkcja ma wartość największą w wierzchołku - PRAWDA\n3. p = -8/(-4) = 2, q = f(2) = -8 + 16 - 6 = 2, więc W = (2, 2) - PRAWDA\n4. Δ = 64 - 48 = 16 > 0, więc są dwa miejsca zerowe - PRAWDA",
+              "xp_reward": 25,
+              "difficulty": "hard"
+            },
+            {
+              "type": "true_false",
+              "question_text": "Parabola będąca wykresem funkcji kwadratowej zawsze przecina oś OY.",
+              "options": ["Prawda", "Fałsz"],
+              "correct_answer": "Prawda",
+              "explanation": "Funkcja kwadratowa f(x) = ax² + bx + c zawsze przecina oś OY w punkcie (0, c). Wartość funkcji dla x = 0 wynosi f(0) = c, czyli wyraz wolny. Każda funkcja kwadratowa ma określoną wartość dla x = 0.",
+              "xp_reward": 10,
+              "difficulty": "easy"
+            }
+          ],
+          "totalXP": 70,
+          "passingScore": 50
+        }
+      ]
+    }
+  ],
+  "badges": [
+    {
+      "name": "Mistrz Funkcji Kwadratowych",
+      "description": "Ukończ wszystkie zadania z funkcji kwadratowych z wynikiem powyżej 90%",
+      "icon_url": "/badges/quadratic-master.png",
+      "category": "mastery",
+      "criteria": [
+        {
+          "criteria_type": "topic_completion",
+          "criteria_value": 90
+        }
+      ]
+    },
+    {
+      "name": "Maturzysta - Matematyka Podstawowa",
+      "description": "Ukończ cały kurs matematyki podstawowej klasa 3",
+      "category": "class_completion",
+      "criteria": [
+        {
+          "criteria_type": "class_progress",
+          "criteria_value": 100
+        }
+      ]
+    }
+  ]
+}

@@ -74,7 +74,7 @@ GROUP BY table_name
 ORDER BY table_name;
 " | sed 's/+$//' | sed 's/^ *//' > "$OUTPUT_FILE"
 
-echo "🧹 Czyszczenie pliku wynikowego..."
+
 
 sed -i '/create_statement/d' "$OUTPUT_FILE"
 sed -i '/^-\+$/d' "$OUTPUT_FILE"

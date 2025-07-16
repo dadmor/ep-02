@@ -1,4 +1,4 @@
-// src/App.tsx - TYLKO DODAJ LANDING PAGE, reszta bez zmian
+// src/App.tsx
 import { Authenticated, ErrorComponent, Refine } from "@refinedev/core";
 import routerBindings, {
   CatchAllNavigate,
@@ -11,10 +11,9 @@ import { Layout } from "./components/layout";
 import { authProvider, supabaseClient } from "./utility";
 
 import { authRoutes } from "./pages/auth";
-// DODAJ TYLKO TĘ LINIĘ:
 import { LandingPage } from "./pages/landing";
 
-// Import zorganizowanych teacher exports - BEZ ZMIAN
+// Import teacher exports - BEZ ZMIAN
 import {
   teacherResources,
   teacherRoutes,
@@ -25,6 +24,12 @@ import {
   studentResources,
   studentRoutes,
 } from "./pages/student";
+
+// Import operator exports - NOWOŚĆ
+import {
+  operatorResources,
+  operatorRoutes,
+} from "./pages/operator";
 
 function App() {
   return (
@@ -37,6 +42,7 @@ function App() {
         resources={[
           ...teacherResources,
           ...studentResources,
+          ...operatorResources, // DODANE
         ]}
         options={{
           syncWithLocation: true,
@@ -51,7 +57,7 @@ function App() {
           {/* Auth routes - BEZ ZMIAN */}
           {...authRoutes}
 
-          {/* Protected routes wrapper - BEZ ZMIAN - USUŃ /app/* */}
+          {/* Protected routes wrapper */}
           <Route
             element={
               <Authenticated
@@ -70,11 +76,14 @@ function App() {
             {/* Student routes - BEZ ZMIAN */}
             {...studentRoutes}
 
+            {/* Operator routes - DODANE */}
+            {...operatorRoutes}
+
             {/* 404 - BEZ ZMIAN */}
             <Route path="*" element={<ErrorComponent />} />
           </Route>
         </Routes>
-  
+
         <UnsavedChangesNotifier />
         <DocumentTitleHandler />
       </Refine>
