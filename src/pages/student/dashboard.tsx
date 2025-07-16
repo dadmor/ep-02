@@ -178,6 +178,7 @@ export const StudentDashboard: React.FC = () => {
                   const progress = getLessonProgress(lesson.id);
                   const isAvailable = isLessonAvailable(index);
                   const isCompleted = progress && progress.score >= 70;
+                  const hasMaxScore = progress && progress.score === 100;
 
                   return (
                     <Card 
@@ -210,7 +211,7 @@ export const StudentDashboard: React.FC = () => {
                             </div>
                             
                             <div className="flex-1">
-                              <h3 className={`font-semibold ${!isAvailable ? 'text-gray-500' : 'text-gray-800'}`}>
+                              <h3 className={`font-semibold ${!isAvailable ? 'text-gray-500' : hasMaxScore ? 'text-gray-600' : 'text-gray-800'}`}>
                                 {lesson.title}
                               </h3>
                               <p className={`text-sm ${!isAvailable ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -221,6 +222,11 @@ export const StudentDashboard: React.FC = () => {
                                   <p className="text-xs text-gray-500">
                                     Najlepszy wynik: {progress.score}% • Próby: {progress.attempts_count}
                                   </p>
+                                  {progress.score === 100 && (
+                                    <p className="text-xs text-orange-600 font-medium mt-1">
+                                      ⚠️ Maksymalny wynik osiągnięty - kolejne próby nie dadzą XP
+                                    </p>
+                                  )}
                                 </div>
                               )}
                             </div>
@@ -234,14 +240,16 @@ export const StudentDashboard: React.FC = () => {
                               }
                             }}
                             className={
-                              isCompleted 
-                                ? 'bg-green-500 hover:bg-green-600' 
-                                : !isAvailable 
-                                  ? 'bg-gray-300'
-                                  : 'bg-blue-500 hover:bg-blue-600'
+                              hasMaxScore
+                                ? 'bg-gray-400 hover:bg-gray-500'
+                                : isCompleted 
+                                  ? 'bg-green-500 hover:bg-green-600' 
+                                  : !isAvailable 
+                                    ? 'bg-gray-300'
+                                    : 'bg-blue-500 hover:bg-blue-600'
                             }
                           >
-                            {isCompleted ? 'Powtórz' : !isAvailable ? 'Zablokowane' : 'Rozpocznij'}
+                            {hasMaxScore ? 'Powtórz (bez XP)' : isCompleted ? 'Powtórz' : !isAvailable ? 'Zablokowane' : 'Rozpocznij'}
                           </Button>
                         </div>
                       </CardContent>
